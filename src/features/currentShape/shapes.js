@@ -264,22 +264,15 @@ const shapes = {
 
 export const randomShapeGenerator = () => {
   //func that generate random shape at random position to be dispatched
-  const shape = [[], [], [], [], [], [], [], [], [], []];
-
   const RowrandomShape = shapes[Math.floor(Math.random() * (7 - 1 + 1)) + 1];
 
   const randomformIndex =
     Math.floor(Math.random() * (RowrandomShape.length - 1 - 0 + 1)) + 0;
-  console.log(RowrandomShape);
-  console.log(randomformIndex);
   const randomStartingIndex =
     Math.floor(
       Math.random() * (9 - RowrandomShape[randomformIndex].length - 0 + 1)
     ) + 0;
-  for (let i = 0; i < RowrandomShape[randomformIndex].length; i++) {
-    shape[randomStartingIndex + i] = RowrandomShape[randomformIndex][i];
-  }
-  console.log(shape);
-  return shape;
+
+  return {shape:RowrandomShape[randomformIndex],position:randomStartingIndex};
 };
 // to do later create func to generate random shape with random positon and random rotate

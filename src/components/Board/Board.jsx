@@ -14,7 +14,7 @@ const dispatch=useDispatch()
   return (
     <>
     <button onClick={()=>{
-   dispatch(addShape(randomShapeGenerator()))
+      console.log(randomShapeGenerator())
     }}>add shape</button>
     <div className={`${styles.boardBody}`}>
       {boardInfo.boardStats.map((columnInfo, idx) => (
