@@ -1,0 +1,10 @@
+.boardBody{
+    border:2px solid grey;
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+    width: 90vw;
+    height: 80vh;
+    max-height: 800px;
+    max-width: 400px;
+}
