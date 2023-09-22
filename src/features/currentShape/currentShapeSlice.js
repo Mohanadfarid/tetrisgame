@@ -1,14 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [[], [], [], [], [], [], [], [], [], []];
+const initialState = {
+  coulmnPossession: 19,
+  rowpossession: 0,
+  shape: [],
+  isActive: false,
+};
 const currentShapeSlice = createSlice({
   initialState,
   name: "currentShape",
   reducers: {
     setcurrentShape: (state, action) => {
-      for (let column = 0; column < action.payload.length; column++) {
-        state[column] = action.payload[column];
-      }
+      state.isActive = true;
+      state.shape = action.payload.shape;
+      state.coulmnPossession = action.payload.coulmnPossession;
+      state.rowpossession=action.payload.rowpossession
     },
   },
 });
