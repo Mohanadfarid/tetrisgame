@@ -14,9 +14,15 @@ const currentShapeSlice = createSlice({
       state.isActive = true;
       state.shape = action.payload.shape;
       state.coulmnPossession = action.payload.coulmnPossession;
-      state.rowpossession=action.payload.rowpossession
+      state.rowpossession = action.payload.rowpossession;
     },
+    moveLeft: (state, action) => {
+      state.coulmnPossession--
+    },
+    moveRight: (state, action) => {},
+    moveDown: (state, action) => {},
   },
 });
-export const { setcurrentShape } = currentShapeSlice.actions;
+export const { moveDown, moveLeft, moveRight, setcurrentShape } =
+  currentShapeSlice.actions;
 export default currentShapeSlice.reducer;

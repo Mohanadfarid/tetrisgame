@@ -4,21 +4,41 @@ import styles from "./board.module.css";
 import BoardColumn from "../boardColumn/BoardColumn";
 import { useDispatch } from "react-redux";
 import { randomShapeGenerator } from "../../features/currentShape/shapes";
-import { setcurrentShape } from "../../features/currentShape/currentShapeSlice";
-import { createShapObject } from "../../utils/helpers";
+import { moveLeft, setcurrentShape } from "../../features/currentShape/currentShapeSlice";
+import {
+  checkIfShapeCanGoLeft,
+  checkIfShapeCanGoRight,
+  createShapObject,
+} from "../../utils/helpers";
 
 const Board = () => {
   const dispatch = useDispatch();
   const boardInfo = useSelector((state) => state.board);
+  const shapInfo = useSelector((state) => state.currentShape);
+
+  const movingLeftHanddler = () => {
+    if(checkIfShapeCanGoLeft(shapInfo, boardInfo)){
+      dispatch(moveLeft(shapInfo))
+    }
+  };
   return (
     <>
       <button
-        onClick={async () => {
+        onClick={() => {
           dispatch(setcurrentShape(createShapObject(randomShapeGenerator())));
         }}
       >
         start game
       </button>
+      <button onClick={movingLeftHanddler}>left</button>
+      <button
+        onClick={() => {
+          console.log(checkIfShapeCanGoRight(shapInfo, boardInfo));
+        }}
+      >
+        right
+      </button>
+      <button>down</button>
       <div className={`${styles.boardBody}`}>
         {boardInfo.boardStats.map((columnInfo, columnidex) => (
           <BoardColumn key={columnidex} columnInfo={columnInfo} />
