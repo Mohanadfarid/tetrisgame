@@ -18,14 +18,51 @@ export const addShapeToBoardAndReturnboard = (curretShape, board) => {
 export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
   const newBoard=[...board];
   const shapeInfo=currentShape.shape;
-  for(let coulmn=0;coulmn<shapeInfo.length;coulmn++){
-    for(let row=0;row<shapeInfo[coulmn].length;row++){//19
-      newBoard[currentShape.coulmnPossession-1+coulmn][19-currentShape.rowpossession-row]=
-      newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row];
-      newBoard[currentShape.coulmnPossession+shapeInfo.length-1][19-currentShape.rowpossession-row]={isfull:false,color:"black"}
+
+  //finding the tallest coulmn so that we could itarate over its rows
+  let tallestCoulmn=0;
+  for(let i =0;i<shapeInfo.length;i++){
+    if(shapeInfo[i].length>tallestCoulmn){
+      tallestCoulmn=shapeInfo[i].length
     }
   }
-  
+
+  for(let coulmn=0;coulmn<shapeInfo.length;coulmn++){
+    for(let row=0;row<tallestCoulmn;row++){//19
+      newBoard[currentShape.coulmnPossession-1+coulmn][19-currentShape.rowpossession-row]=
+      newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row]
+      if(coulmn===shapeInfo.length-1){
+        newBoard[currentShape.coulmnPossession+shapeInfo.length-1][19-currentShape.rowpossession-row]={isfull:false,color:"black"}
+      }
+
+    }
+  }
+
+return newBoard;
+}
+
+export const moveShapToRightAndRetrunboard=(currentShape,board)=>{
+  const newBoard=[...board];
+  const shapeInfo=currentShape.shape;
+
+  //finding the tallest coulmn so that we could itarate over its rows
+  let tallestCoulmn=0;
+  for(let i =0;i<shapeInfo.length;i++){
+    if(shapeInfo[i].length>tallestCoulmn){
+      tallestCoulmn=shapeInfo[i].length
+    }
+  }
+
+  for(let coulmn=shapeInfo.length-1;coulmn>=0;coulmn--){
+    for(let row=0;row<tallestCoulmn;row++){
+      newBoard[currentShape.coulmnPossession+1+coulmn][19-currentShape.rowpossession-row]=
+      newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row]
+      if(coulmn===0){
+        newBoard[currentShape.coulmnPossession][19-currentShape.rowpossession-row]={isfull:false,color:"black"}
+      }
+
+    }
+  }
 
 return newBoard;
 }
@@ -56,54 +93,21 @@ export const createShapObject = ({ shape, position }) => {
 
 //checkers functions
 export const checkIfShapeCanGoDown = (currnetShape, board) => {};
-export const checkIfShapeCanGoLeft = (currentShape, board) => {
-  //to do clean this logic 
-  if (currentShape.shape[0]) {
-    for (let row = 0; row < currentShape.shape[0].length; row++) {
-      if (
-        currentShape.coulmnPossession - 1 > 0
-          ? board.boardStats[currentShape.coulmnPossession - 1][
-              currentShape.rowpossession + row
-            ].isfull === true
-          : true ||
-          currentShape.coulmnPossession > 0
-          ? board.boardStats[currentShape.coulmnPossession][
-              currentShape.rowpossession + row
-            ].isfull === true
-          : true
-      ) {
-        return false;
-      }
-    }
-  } else {
-    return false;
-  }
 
+export const checkIfShapeCanGoLeft = (currentShape, board) => {
+  if (!currentShape.shape[0]||currentShape.coulmnPossession===0)return false //checking if the there is a shape and the shap is not at the left edge
+  for (let row=0;row<currentShape.shape[0].length;row++){
+    if(board.boardStats[currentShape.coulmnPossession-1][row].color!=='black'&&
+    board.boardStats[currentShape.coulmnPossession][row].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
+  }
   return true;
 };
 
 export const checkIfShapeCanGoRight = (currentShape, board) => {
-   //to do clean this logic
-   if (currentShape.shape[currentShape.shape.length-1]) {
-    for (let row = 0; row < currentShape.shape[currentShape.shape.length-1].length; row++) {
-      if (
-        currentShape.coulmnPossession +currentShape.shape.length-1+1 > 0
-          ? board.boardStats[currentShape.coulmnPossession +currentShape.shape.length-1+1][
-              currentShape.rowpossession + row
-            ].isfull === true
-          : true ||
-          currentShape.coulmnPossession +currentShape.shape.length-1 > 0
-          ? board.boardStats[currentShape.coulmnPossession +currentShape.shape.length-1][
-              currentShape.rowpossession + row
-            ].isfull === true
-          : true
-      ) {
-        return false;
-      }
-    }
-  } else {
-    return false;
+  if (!currentShape.shape[0]||currentShape.coulmnPossession+currentShape.shape.length-1===9)return false //checking if the there is a shape and the shap is not at the right edge
+  for (let row=0;row<currentShape.shape[currentShape.shape.length-1].length;row++){
+    if(board.boardStats[currentShape.coulmnPossession+currentShape.shape.length][row].color!=='black'&&
+    board.boardStats[currentShape.coulmnPossession+currentShape.shape.length-1][row].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
-
   return true;
 };
