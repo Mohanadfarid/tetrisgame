@@ -5,15 +5,18 @@ import BoardColumn from "../boardColumn/BoardColumn";
 import { useDispatch } from "react-redux";
 import { randomShapeGenerator } from "../../features/currentShape/shapes";
 import {
+  moveDown,
   moveLeft,
   moveRight,
   setcurrentShape,
 } from "../../features/currentShape/currentShapeSlice";
 import {
+  checkIfShapeCanGoDown,
   checkIfShapeCanGoLeft,
   checkIfShapeCanGoRight,
   createShapObject,
 } from "../../utils/helpers";
+import { clearBoard } from "../../features/board/boardSlice";
 
 const Board = () => {
   const dispatch = useDispatch();
@@ -31,6 +34,12 @@ const Board = () => {
       dispatch(moveRight(shapInfo));
     }
   };
+
+  const movingDownHanddler =()=>{
+    if (checkIfShapeCanGoDown(shapInfo, boardInfo)) {
+      dispatch(moveDown(shapInfo));
+    }
+  }
   return (
     <>
       <button
@@ -42,7 +51,9 @@ const Board = () => {
       </button>
       <button onClick={movingLeftHanddler}>left</button>
       <button onClick={movingRightHanddler}>right</button>
-      <button>down</button>
+      <button onClick={movingDownHanddler}>down</button>
+      {/* <button>rotate</button> */}
+      <button onClick={()=>{dispatch(clearBoard())}}>reset board</button>
       <div className={`${styles.boardBody}`}>
         {boardInfo.boardStats.map((columnInfo, columnidex) => (
           <BoardColumn key={columnidex} columnInfo={columnInfo} />
