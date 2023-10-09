@@ -29,8 +29,11 @@ export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
 
   for(let coulmn=0;coulmn<shapeInfo.length;coulmn++){
     for(let row=0;row<tallestCoulmn;row++){//19
-      newBoard[currentShape.coulmnPossession-1+coulmn][19-currentShape.rowpossession-row]=
-      newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row]
+      if(newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row].color==='black'&&coulmn===0){}
+      else{
+        newBoard[currentShape.coulmnPossession-1+coulmn][19-currentShape.rowpossession-row]=
+        newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row]
+      }
       if(coulmn===shapeInfo.length-1){
         newBoard[currentShape.coulmnPossession+shapeInfo.length-1][19-currentShape.rowpossession-row]={isfull:false,color:"black"}
       }
@@ -55,8 +58,11 @@ export const moveShapToRightAndRetrunboard=(currentShape,board)=>{
 
   for(let coulmn=shapeInfo.length-1;coulmn>=0;coulmn--){
     for(let row=0;row<tallestCoulmn;row++){
+      if(newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row].color==='black'&&coulmn===shapeInfo.length-1){}
+      else{
       newBoard[currentShape.coulmnPossession+1+coulmn][19-currentShape.rowpossession-row]=
       newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row]
+      }
       if(coulmn===0){
         newBoard[currentShape.coulmnPossession][19-currentShape.rowpossession-row]={isfull:false,color:"black"}
       }
@@ -66,6 +72,34 @@ export const moveShapToRightAndRetrunboard=(currentShape,board)=>{
 
 return newBoard;
 }
+
+export const moveShapDownAndRetrunboard=(currentShape,board)=>{
+  const newBoard=[...board];
+  const shapeInfo=currentShape.shape;
+
+    //finding the tallest coulmn so that we could itarate over its rows
+    let tallestCoulmn=0;
+    for(let i =0;i<shapeInfo.length;i++){
+      if(shapeInfo[i].length>tallestCoulmn){
+        tallestCoulmn=shapeInfo[i].length
+      }
+    }
+
+  for(let coulmn=0;coulmn<shapeInfo.length;coulmn++){
+    for(let row = 0;row<tallestCoulmn;row++){
+      if(newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row].color==='black'&&row===0){}
+      else{
+        newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row+1]=
+        newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row]
+      }
+    }
+    if(shapeInfo[coulmn].length===tallestCoulmn){
+      newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-tallestCoulmn+1]={isfull:false,color:"black"}
+    }
+  }
+  return newBoard;
+}
+
 
 // a function to retrun the complete shape object to fit in the current shape slice
 export const createShapObject = ({ shape, position }) => {
@@ -92,7 +126,6 @@ export const createShapObject = ({ shape, position }) => {
 };
 
 //checkers functions
-export const checkIfShapeCanGoDown = (currnetShape, board) => {};
 
 export const checkIfShapeCanGoLeft = (currentShape, board) => {
   if (!currentShape.shape[0]||currentShape.coulmnPossession===0)return false //checking if the there is a shape and the shap is not at the left edge
@@ -110,4 +143,14 @@ export const checkIfShapeCanGoRight = (currentShape, board) => {
     board.boardStats[currentShape.coulmnPossession+currentShape.shape.length-1][row].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
   return true;
+};
+
+export const checkIfShapeCanGoDown = (currentShape, board) => {
+  if (!currentShape.shape[0]||currentShape.rowpossession===0)return false //checking if the there is a shape and the shap is not at the bottom edge
+  for(let coulmn=0;coulmn<currentShape.length;coulmn++){
+    if(board.boardStats[currentShape.coulmnPossession+currentShape.shape.length][currentShape[coulmn].length-1].color!=='black'&&
+    board.boardStats[currentShape.coulmnPossession+currentShape.shape.length][currentShape[coulmn].length].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
+  }
+  
+  return true
 };

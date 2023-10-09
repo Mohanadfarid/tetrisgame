@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initiaBoardlState } from "./initialBoardState";
-import { addShapeToBoardAndReturnboard, moveShapToLeftAndRetrunboard, moveShapToRightAndRetrunboard } from "../../utils/helpers";
-import { moveLeft, moveRight, setcurrentShape } from "../currentShape/currentShapeSlice";
+import { addShapeToBoardAndReturnboard, moveShapDownAndRetrunboard, moveShapToLeftAndRetrunboard, moveShapToRightAndRetrunboard } from "../../utils/helpers";
+import { moveDown, moveLeft, moveRight, setcurrentShape } from "../currentShape/currentShapeSlice";
 
 const initialTops = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const boardSlice = createSlice({
@@ -32,6 +32,10 @@ const boardSlice = createSlice({
 
     builder.addCase(moveRight,(state,action)=>{
       state.boardStats= moveShapToRightAndRetrunboard(action.payload,state.boardStats)
+    })
+
+    builder.addCase(moveDown,(state,action)=>{
+      state.boardStats=moveShapDownAndRetrunboard(action.payload,state.boardStats)
     })
   },
 });

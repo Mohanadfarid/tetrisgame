@@ -22,7 +22,9 @@ const currentShapeSlice = createSlice({
     moveRight: (state, action) => {
       state.coulmnPossession++
     },
-    moveDown: (state, action) => {},
+    moveDown: (state, action) => {
+      state.rowpossession--
+    },
   },
 });
 export const { moveDown, moveLeft, moveRight, setcurrentShape } =
