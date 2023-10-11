@@ -130,8 +130,15 @@ export const createShapObject = ({ shape, position }) => {
 export const checkIfShapeCanGoLeft = (currentShape, board) => {
   if (!currentShape.shape[0]||currentShape.coulmnPossession===0)return false //checking if the there is a shape and the shap is not at the left edge
   for (let row=0;row<currentShape.shape[0].length;row++){
-    if(board.boardStats[currentShape.coulmnPossession-1][row].color!=='black'&&
-    board.boardStats[currentShape.coulmnPossession][row].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
+    // debug code tobe removed later!!
+    // console.log(`index `,currentShape.coulmnPossession-1,20-currentShape.rowpossession-row-1)
+    // console.log(`value`,board.boardStats[currentShape.coulmnPossession-1][20-currentShape.rowpossession-row-1].color)
+
+    // console.log(`index `,currentShape.coulmnPossession,20-currentShape.rowpossession-row-1)
+    // console.log(`value`,board.boardStats[currentShape.coulmnPossession][20-currentShape.rowpossession-row-1].color)
+    // console.log(`-----------------------------------`)
+    if(board.boardStats[currentShape.coulmnPossession-1][20-currentShape.rowpossession-row-1].color!=='black'&&
+    board.boardStats[currentShape.coulmnPossession][20-currentShape.rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
   return true;
 };
@@ -139,8 +146,8 @@ export const checkIfShapeCanGoLeft = (currentShape, board) => {
 export const checkIfShapeCanGoRight = (currentShape, board) => {
   if (!currentShape.shape[0]||currentShape.coulmnPossession+currentShape.shape.length-1===9)return false //checking if the there is a shape and the shap is not at the right edge
   for (let row=0;row<currentShape.shape[currentShape.shape.length-1].length;row++){
-    if(board.boardStats[currentShape.coulmnPossession+currentShape.shape.length][row].color!=='black'&&
-    board.boardStats[currentShape.coulmnPossession+currentShape.shape.length-1][row].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
+    if(board.boardStats[currentShape.coulmnPossession+currentShape.shape.length][20-currentShape.rowpossession-row-1].color!=='black'&&
+    board.boardStats[currentShape.coulmnPossession+currentShape.shape.length-1][20-currentShape.rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
   return true;
 };
