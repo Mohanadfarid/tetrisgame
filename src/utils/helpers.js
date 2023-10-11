@@ -153,11 +153,28 @@ export const checkIfShapeCanGoRight = (currentShape, board) => {
 };
 
 export const checkIfShapeCanGoDown = (currentShape, board) => {
+
+    //finding the tallest coulmn so that we know the bottom limits to our shape
+    let tallestCoulmn=0;
+    for(let i =0;i<currentShape.shape.length;i++){
+      if(currentShape.shape[i].length>tallestCoulmn){
+        tallestCoulmn=currentShape.shape[i].length
+      }
+    }
+
+
   if (!currentShape.shape[0]||currentShape.rowpossession===0)return false //checking if the there is a shape and the shap is not at the bottom edge
-  for(let coulmn=0;coulmn<currentShape.length;coulmn++){
-    if(board.boardStats[currentShape.coulmnPossession+currentShape.shape.length][currentShape[coulmn].length-1].color!=='black'&&
-    board.boardStats[currentShape.coulmnPossession+currentShape.shape.length][currentShape[coulmn].length].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
+  for(let coulmn=0;coulmn<currentShape.shape.length;coulmn++){
+    // debug code tobe removed later!!
+    // console.log(`index `,currentShape.coulmnPossession+coulmn,19-currentShape.rowpossession)
+    // console.log(`value`,board.boardStats[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession].color)
+
+    // console.log(`index `,currentShape.coulmnPossession+coulmn,19-currentShape.rowpossession+1)
+    // console.log(`value`,board.boardStats[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession+1].color)
+    // console.log(`-----------------------------------`)
+
+    if(board.boardStats[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession].color!=='black'&&
+    board.boardStats[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession+1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
-  
   return true
 };
