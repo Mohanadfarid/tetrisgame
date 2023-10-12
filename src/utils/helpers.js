@@ -3,13 +3,16 @@
 
 //a function that addes a shap to the top of a board and return the board
 export const addShapeToBoardAndReturnboard = (currentShape, board) => {
+  const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
+  const rowpossession = currentShape.rowpossession
+  const coulmnPossession =  currentShape.coulmnPossession
   const NewBoard = [...board];
-  console.log(currentShape.shape.shape[currentShape.shapeFormIndex])
-  for (let column = 0; column < currentShape.shape.shape[currentShape.shapeFormIndex].length; column++) {
-    for (let row = 0; row < currentShape.shape.shape[currentShape.shapeFormIndex][column].length; row++) {
-      NewBoard[currentShape.coulmnPossession + column][
-        19 - currentShape.rowpossession - row
-      ] = currentShape.shape.shape[currentShape.shapeFormIndex][column][row];
+
+  for (let column = 0; column < shape.length; column++) {
+    for (let row = 0; row < shape[column].length; row++) {
+      NewBoard[coulmnPossession + column][
+        19 - rowpossession - row
+      ] = shape[column][row];
     }
   }
   return NewBoard;
@@ -18,25 +21,27 @@ export const addShapeToBoardAndReturnboard = (currentShape, board) => {
 //a funciton to move the shape to left on the board
 export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
   const newBoard=[...board];
-  const shapeInfo=currentShape.shape.shape[currentShape.shapeFormIndex];
-
+  const shape=currentShape.shape.shape[currentShape.shapeFormIndex];
+  const coulmnPossession = currentShape.coulmnPossession;
+  const rowpossession = currentShape.rowpossession
+  
   //finding the tallest coulmn so that we could itarate over its rows
   let tallestCoulmn=0;
-  for(let i =0;i<shapeInfo.length;i++){
-    if(shapeInfo[i].length>tallestCoulmn){
-      tallestCoulmn=shapeInfo[i].length
+  for(let i =0;i<shape.length;i++){
+    if(shape[i].length>tallestCoulmn){
+      tallestCoulmn=shape[i].length
     }
   }
 
-  for(let coulmn=0;coulmn<shapeInfo.length;coulmn++){
+  for(let coulmn=0;coulmn<shape.length;coulmn++){
     for(let row=0;row<tallestCoulmn;row++){//19
-      if(newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row].color==='black'&&coulmn===0){}
+      if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].color==='black'&&coulmn===0){}
       else{
-        newBoard[currentShape.coulmnPossession-1+coulmn][19-currentShape.rowpossession-row]=
-        newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row]
+        newBoard[coulmnPossession-1+coulmn][19-rowpossession-row]=
+        newBoard[coulmnPossession+coulmn][19-rowpossession-row]
       }
-      if(coulmn===shapeInfo.length-1){
-        newBoard[currentShape.coulmnPossession+shapeInfo.length-1][19-currentShape.rowpossession-row]={isfull:false,color:"black"}
+      if(coulmn===shape.length-1){
+        newBoard[coulmnPossession+shape.length-1][19-rowpossession-row]={isfull:false,color:"black"}
       }
 
     }
@@ -47,25 +52,28 @@ return newBoard;
 
 export const moveShapToRightAndRetrunboard=(currentShape,board)=>{
   const newBoard=[...board];
-  const shapeInfo=currentShape.shape.shape[currentShape.shapeFormIndex];
+  const shape = currentShape.shape.shape[currentShape.shapeFormIndex];
+  const coulmnPossession = currentShape.coulmnPossession;
+  const rowpossession = currentShape.rowpossession
+  
 
   //finding the tallest coulmn so that we could itarate over its rows
   let tallestCoulmn=0;
-  for(let i =0;i<shapeInfo.length;i++){
-    if(shapeInfo[i].length>tallestCoulmn){
-      tallestCoulmn=shapeInfo[i].length
+  for(let i =0;i<shape.length;i++){
+    if(shape[i].length>tallestCoulmn){
+      tallestCoulmn=shape[i].length
     }
   }
 
-  for(let coulmn=shapeInfo.length-1;coulmn>=0;coulmn--){
+  for(let coulmn=shape.length-1;coulmn>=0;coulmn--){
     for(let row=0;row<tallestCoulmn;row++){
-      if(newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row].color==='black'&&coulmn===shapeInfo.length-1){}
+      if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].color==='black'&&coulmn===shape.length-1){}
       else{
-      newBoard[currentShape.coulmnPossession+1+coulmn][19-currentShape.rowpossession-row]=
-      newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row]
+      newBoard[coulmnPossession+1+coulmn][19-rowpossession-row]=
+      newBoard[coulmnPossession+coulmn][19-rowpossession-row]
       }
       if(coulmn===0){
-        newBoard[currentShape.coulmnPossession][19-currentShape.rowpossession-row]={isfull:false,color:"black"}
+        newBoard[coulmnPossession][19-rowpossession-row]={isfull:false,color:"black"}
       }
 
     }
@@ -76,26 +84,28 @@ return newBoard;
 
 export const moveShapDownAndRetrunboard=(currentShape,board)=>{
   const newBoard=[...board];
-  const shapeInfo=currentShape.shape.shape[currentShape.shapeFormIndex];
+  const shape = currentShape.shape.shape[currentShape.shapeFormIndex];
+  const coulmnPossession = currentShape.coulmnPossession;
+  const rowpossession = currentShape.rowpossession
 
     //finding the tallest coulmn so that we could itarate over its rows
     let tallestCoulmn=0;
-    for(let i =0;i<shapeInfo.length;i++){
-      if(shapeInfo[i].length>tallestCoulmn){
-        tallestCoulmn=shapeInfo[i].length
+    for(let i =0;i<shape.length;i++){
+      if(shape[i].length>tallestCoulmn){
+        tallestCoulmn=shape[i].length
       }
     }
 
-  for(let coulmn=0;coulmn<shapeInfo.length;coulmn++){
+  for(let coulmn=0;coulmn<shape.length;coulmn++){
     for(let row = 0;row<tallestCoulmn;row++){
-      if(newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row].color==='black'&&row===0){}
+      if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].color==='black'&&row===0){}
       else{
-        newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row+1]=
-        newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-row]
+        newBoard[coulmnPossession+coulmn][19-rowpossession-row+1]=
+        newBoard[coulmnPossession+coulmn][19-rowpossession-row]
       }
     }
-    if(shapeInfo[coulmn].length===tallestCoulmn){
-      newBoard[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession-tallestCoulmn+1]={isfull:false,color:"black"}
+    if(shape[coulmn].length===tallestCoulmn){
+      newBoard[coulmnPossession+coulmn][19-rowpossession-tallestCoulmn+1]={isfull:false,color:"black"}
     }
   }
   return newBoard;
@@ -104,6 +114,7 @@ export const moveShapDownAndRetrunboard=(currentShape,board)=>{
 
 // a function to retrun the complete shape object to fit in the current shape slice
 export const createShapObject = ({ shape, position ,shapeFormIndex}) => {
+  
   const shapeObject = {
     shape,
     rowpossession: 19,
@@ -130,43 +141,63 @@ export const createShapObject = ({ shape, position ,shapeFormIndex}) => {
 //checkers functions
 
 export const checkIfShapeCanGoLeft = (currentShape, board) => {
-  
+
   const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
   const rowpossession = currentShape.rowpossession
   const coulmnPossession = currentShape.coulmnPossession
+  const boardStats = board.boardStats
 
+// to do fix this condition shape[0]
   if (!shape[0]||coulmnPossession===0)return false //checking if the there is a shape and the shap is not at the left edge
   for (let row=0;row<shape[0].length;row++){
-    if(board.boardStats[coulmnPossession-1][20-rowpossession-row-1].color!=='black'&&
-    board.boardStats[coulmnPossession][20-rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
+    if(boardStats[coulmnPossession-1][20-rowpossession-row-1].color!=='black'&&
+    boardStats[coulmnPossession][20-rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
   return true;
 };
 
 export const checkIfShapeCanGoRight = (currentShape, board) => {
-  if (!currentShape.shape.shape[currentShape.shapeFormIndex][0]||currentShape.coulmnPossession+currentShape.shape.shape[currentShape.shapeFormIndex].length-1===9)return false //checking if the there is a shape and the shap is not at the right edge
-  for (let row=0;row<currentShape.shape.shape[currentShape.shapeFormIndex][currentShape.shape.shape[currentShape.shapeFormIndex].length-1].length;row++){
-    if(board.boardStats[currentShape.coulmnPossession+currentShape.shape.shape[currentShape.shapeFormIndex].length][20-currentShape.rowpossession-row-1].color!=='black'&&
-    board.boardStats[currentShape.coulmnPossession+currentShape.shape.shape[currentShape.shapeFormIndex].length-1][20-currentShape.rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
+  const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
+  const rowpossession = currentShape.rowpossession
+  const coulmnPossession = currentShape.coulmnPossession
+  const boardStats = board.boardStats
+
+  
+  if (!shape[0]||coulmnPossession+shape.length-1===9)return false //checking if the there is a shape and the shap is not at the right edge
+  for (let row=0;row<shape[shape.length-1].length;row++){
+    if(boardStats[coulmnPossession+shape.length][20-rowpossession-row-1].color!=='black'&&
+    boardStats[coulmnPossession+shape.length-1][20-rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
   return true;
 };
 
 export const checkIfShapeCanGoDown = (currentShape, board) => {
 
+  const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
+  const rowpossession = currentShape.rowpossession
+  const coulmnPossession = currentShape.coulmnPossession
+  const boardStats = board.boardStats
+  const shapeColor = currentShape.shape.color
+
     //finding the tallest coulmn so that we know the bottom limits to our shape
     let tallestCoulmn=0;
-    for(let i =0;i<currentShape.shape.shape[currentShape.shapeFormIndex].length;i++){
-      if(currentShape.shape.shape[currentShape.shapeFormIndex][i].length>tallestCoulmn){
-        tallestCoulmn=currentShape.shape.shape[currentShape.shapeFormIndex][i].length
+    for(let i =0;i<shape.length;i++){
+      if(shape[i].length>tallestCoulmn){
+        tallestCoulmn=shape[i].length
       }
     }
 
 
-  if (!currentShape.shape.shape[currentShape.shapeFormIndex][0]||currentShape.rowpossession===0)return false //checking if the there is a shape and the shap is not at the bottom edge
-  for(let coulmn=0;coulmn<currentShape.shape.shape[currentShape.shapeFormIndex].length;coulmn++){
-    if(board.boardStats[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession].color!=='black'&&
-    board.boardStats[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession+1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
+  if (!shape[0]||rowpossession===0)return false //checking if the there is a shape and the shap is not at the bottom edge
+  for(let coulmn=0;coulmn<shape.length;coulmn++){
+    // console.log(`index:`,coulmnPossession+coulmn,19-rowpossession)
+    // console.log(`value:`,boardStats[coulmnPossession+coulmn][19-rowpossession].color)
+    // console.log()
+    // console.log(`index:`,coulmnPossession+coulmn,19-rowpossession+1)
+    // console.log(`value:`, boardStats[coulmnPossession+coulmn][19-rowpossession+1].color)
+    // console.log(`--------------------`)
+    if((boardStats[coulmnPossession+coulmn][19-rowpossession].color!==`black`)&&
+    boardStats[coulmnPossession+coulmn][19-rowpossession+1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
   return true
 };
