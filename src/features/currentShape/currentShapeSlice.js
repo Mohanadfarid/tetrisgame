@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   coulmnPossession: 9,
   rowpossession: 0,
-  shape: [],
+  shape: {},
+  shapeFormIndex:0,
   isActive: false,
 };
 const currentShapeSlice = createSlice({
@@ -15,6 +16,7 @@ const currentShapeSlice = createSlice({
       state.shape = action.payload.shape;
       state.coulmnPossession = action.payload.coulmnPossession;
       state.rowpossession = action.payload.rowpossession;
+      state.shapeFormIndex = action.payload.shapeFormIndex
     },
     moveLeft: (state, action) => {
       state.coulmnPossession--

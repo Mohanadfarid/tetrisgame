@@ -2,13 +2,14 @@
 //board manbulation functions
 
 //a function that addes a shap to the top of a board and return the board
-export const addShapeToBoardAndReturnboard = (curretShape, board) => {
+export const addShapeToBoardAndReturnboard = (currentShape, board) => {
   const NewBoard = [...board];
-  for (let column = 0; column < curretShape.shape.length; column++) {
-    for (let row = 0; row < curretShape.shape[column].length; row++) {
-      NewBoard[curretShape.coulmnPossession + column][
-        19 - curretShape.rowpossession - row
-      ] = curretShape.shape[column][row];
+  console.log(currentShape.shape.shape[currentShape.shapeFormIndex])
+  for (let column = 0; column < currentShape.shape.shape[currentShape.shapeFormIndex].length; column++) {
+    for (let row = 0; row < currentShape.shape.shape[currentShape.shapeFormIndex][column].length; row++) {
+      NewBoard[currentShape.coulmnPossession + column][
+        19 - currentShape.rowpossession - row
+      ] = currentShape.shape.shape[currentShape.shapeFormIndex][column][row];
     }
   }
   return NewBoard;
@@ -17,7 +18,7 @@ export const addShapeToBoardAndReturnboard = (curretShape, board) => {
 //a funciton to move the shape to left on the board
 export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
   const newBoard=[...board];
-  const shapeInfo=currentShape.shape;
+  const shapeInfo=currentShape.shape.shape[currentShape.shapeFormIndex];
 
   //finding the tallest coulmn so that we could itarate over its rows
   let tallestCoulmn=0;
@@ -46,7 +47,7 @@ return newBoard;
 
 export const moveShapToRightAndRetrunboard=(currentShape,board)=>{
   const newBoard=[...board];
-  const shapeInfo=currentShape.shape;
+  const shapeInfo=currentShape.shape.shape[currentShape.shapeFormIndex];
 
   //finding the tallest coulmn so that we could itarate over its rows
   let tallestCoulmn=0;
@@ -75,7 +76,7 @@ return newBoard;
 
 export const moveShapDownAndRetrunboard=(currentShape,board)=>{
   const newBoard=[...board];
-  const shapeInfo=currentShape.shape;
+  const shapeInfo=currentShape.shape.shape[currentShape.shapeFormIndex];
 
     //finding the tallest coulmn so that we could itarate over its rows
     let tallestCoulmn=0;
@@ -102,11 +103,12 @@ export const moveShapDownAndRetrunboard=(currentShape,board)=>{
 
 
 // a function to retrun the complete shape object to fit in the current shape slice
-export const createShapObject = ({ shape, position }) => {
+export const createShapObject = ({ shape, position ,shapeFormIndex}) => {
   const shapeObject = {
     shape,
     rowpossession: 19,
     coulmnPossession: position,
+    shapeFormIndex,
     isActive: false,
   };
   shapeObject.isActive = true;
@@ -114,11 +116,11 @@ export const createShapObject = ({ shape, position }) => {
   let maxRowHight = 0;
   for (
     let coulmnIndex = 0;
-    coulmnIndex < shapeObject.shape.length;
+    coulmnIndex < shapeObject.shape.shape[shapeFormIndex].length;
     coulmnIndex++
   ) {
-    if (shapeObject.shape[coulmnIndex].length > maxRowHight) {
-      maxRowHight = shapeObject.shape[coulmnIndex].length;
+    if (shapeObject.shape.shape[shapeFormIndex][coulmnIndex].length > maxRowHight) {
+      maxRowHight = shapeObject.shape.shape[shapeFormIndex][coulmnIndex].length;
     }
   }
   shapeObject.rowpossession = 20 - maxRowHight;
@@ -128,26 +130,24 @@ export const createShapObject = ({ shape, position }) => {
 //checkers functions
 
 export const checkIfShapeCanGoLeft = (currentShape, board) => {
-  if (!currentShape.shape[0]||currentShape.coulmnPossession===0)return false //checking if the there is a shape and the shap is not at the left edge
-  for (let row=0;row<currentShape.shape[0].length;row++){
-    // debug code tobe removed later!!
-    // console.log(`index `,currentShape.coulmnPossession-1,20-currentShape.rowpossession-row-1)
-    // console.log(`value`,board.boardStats[currentShape.coulmnPossession-1][20-currentShape.rowpossession-row-1].color)
+  
+  const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
+  const rowpossession = currentShape.rowpossession
+  const coulmnPossession = currentShape.coulmnPossession
 
-    // console.log(`index `,currentShape.coulmnPossession,20-currentShape.rowpossession-row-1)
-    // console.log(`value`,board.boardStats[currentShape.coulmnPossession][20-currentShape.rowpossession-row-1].color)
-    // console.log(`-----------------------------------`)
-    if(board.boardStats[currentShape.coulmnPossession-1][20-currentShape.rowpossession-row-1].color!=='black'&&
-    board.boardStats[currentShape.coulmnPossession][20-currentShape.rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
+  if (!shape[0]||coulmnPossession===0)return false //checking if the there is a shape and the shap is not at the left edge
+  for (let row=0;row<shape[0].length;row++){
+    if(board.boardStats[coulmnPossession-1][20-rowpossession-row-1].color!=='black'&&
+    board.boardStats[coulmnPossession][20-rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
   return true;
 };
 
 export const checkIfShapeCanGoRight = (currentShape, board) => {
-  if (!currentShape.shape[0]||currentShape.coulmnPossession+currentShape.shape.length-1===9)return false //checking if the there is a shape and the shap is not at the right edge
-  for (let row=0;row<currentShape.shape[currentShape.shape.length-1].length;row++){
-    if(board.boardStats[currentShape.coulmnPossession+currentShape.shape.length][20-currentShape.rowpossession-row-1].color!=='black'&&
-    board.boardStats[currentShape.coulmnPossession+currentShape.shape.length-1][20-currentShape.rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
+  if (!currentShape.shape.shape[currentShape.shapeFormIndex][0]||currentShape.coulmnPossession+currentShape.shape.shape[currentShape.shapeFormIndex].length-1===9)return false //checking if the there is a shape and the shap is not at the right edge
+  for (let row=0;row<currentShape.shape.shape[currentShape.shapeFormIndex][currentShape.shape.shape[currentShape.shapeFormIndex].length-1].length;row++){
+    if(board.boardStats[currentShape.coulmnPossession+currentShape.shape.shape[currentShape.shapeFormIndex].length][20-currentShape.rowpossession-row-1].color!=='black'&&
+    board.boardStats[currentShape.coulmnPossession+currentShape.shape.shape[currentShape.shapeFormIndex].length-1][20-currentShape.rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
   return true;
 };
@@ -156,23 +156,15 @@ export const checkIfShapeCanGoDown = (currentShape, board) => {
 
     //finding the tallest coulmn so that we know the bottom limits to our shape
     let tallestCoulmn=0;
-    for(let i =0;i<currentShape.shape.length;i++){
-      if(currentShape.shape[i].length>tallestCoulmn){
-        tallestCoulmn=currentShape.shape[i].length
+    for(let i =0;i<currentShape.shape.shape[currentShape.shapeFormIndex].length;i++){
+      if(currentShape.shape.shape[currentShape.shapeFormIndex][i].length>tallestCoulmn){
+        tallestCoulmn=currentShape.shape.shape[currentShape.shapeFormIndex][i].length
       }
     }
 
 
-  if (!currentShape.shape[0]||currentShape.rowpossession===0)return false //checking if the there is a shape and the shap is not at the bottom edge
-  for(let coulmn=0;coulmn<currentShape.shape.length;coulmn++){
-    // debug code tobe removed later!!
-    // console.log(`index `,currentShape.coulmnPossession+coulmn,19-currentShape.rowpossession)
-    // console.log(`value`,board.boardStats[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession].color)
-
-    // console.log(`index `,currentShape.coulmnPossession+coulmn,19-currentShape.rowpossession+1)
-    // console.log(`value`,board.boardStats[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession+1].color)
-    // console.log(`-----------------------------------`)
-
+  if (!currentShape.shape.shape[currentShape.shapeFormIndex][0]||currentShape.rowpossession===0)return false //checking if the there is a shape and the shap is not at the bottom edge
+  for(let coulmn=0;coulmn<currentShape.shape.shape[currentShape.shapeFormIndex].length;coulmn++){
     if(board.boardStats[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession].color!=='black'&&
     board.boardStats[currentShape.coulmnPossession+coulmn][19-currentShape.rowpossession+1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
