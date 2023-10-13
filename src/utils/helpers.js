@@ -111,6 +111,42 @@ export const moveShapDownAndRetrunboard=(currentShape,board)=>{
   return newBoard;
 }
 
+export const RotateShapAndRetrunboard=(currentShape,board)=>{
+  const tempBoard =JSON.parse(JSON.stringify(board))
+  const shapeObject=currentShape.shape.shape
+  let shape = currentShape.shape.shape[currentShape.shapeFormIndex]
+  const rowpossession = currentShape.rowpossession
+  const coulmnPossession = currentShape.coulmnPossession
+  const shapeColor = currentShape.shape.color;
+  let shapeFormIndex = currentShape.shapeFormIndex;
+
+    //removing the current shape from the tempBoard
+    for(let column = 0; column < shape.length ; column++ ){
+      for(let row = 0 ;row<shape[column].length;row++){
+        if(tempBoard[coulmnPossession+column][19-rowpossession-row].color===shapeColor){
+          tempBoard[coulmnPossession+column][19-rowpossession-row] = {isfull:false,color:"black"}
+        }
+      }
+    }
+  
+  
+    // checking if the form index is the last index in the shape so we could set it to 0  or increase it by one to get another shape
+    if(shapeFormIndex!==shapeObject.length-1){
+      shapeFormIndex++;
+    }else{
+      shapeFormIndex=0;
+    }
+  
+    shape = shapeObject[shapeFormIndex]; //setting the shap into another form of the same shape
+
+    for(let column = 0; column < shape.length ; column++ ){
+      for(let row = 0 ;row<shape[column].length;row++){
+          tempBoard[coulmnPossession+column][19-rowpossession-row] = shape[column][row]
+      }
+    }
+  
+return tempBoard;
+}
 
 // a function to retrun the complete shape object to fit in the current shape slice
 export const createShapObject = ({ shape, position ,shapeFormIndex}) => {
@@ -177,7 +213,7 @@ export const checkIfShapeCanGoDown = (currentShape, board) => {
   const rowpossession = currentShape.rowpossession
   const coulmnPossession = currentShape.coulmnPossession
   const boardStats = board.boardStats
-  const shapeColor = currentShape.shape.color
+  // const shapeColor = currentShape.shape.color
 
     //finding the tallest coulmn so that we know the bottom limits to our shape
     let tallestCoulmn=0;
@@ -201,3 +237,41 @@ export const checkIfShapeCanGoDown = (currentShape, board) => {
   }
   return true
 };
+
+export const checkIfShapeCanRotate = (currentShape, board) =>{
+  const tempBoard =JSON.parse(JSON.stringify(board.boardStats))
+  const shapeObject=currentShape.shape.shape
+  let shape = currentShape.shape.shape[currentShape.shapeFormIndex]
+  const rowpossession = currentShape.rowpossession
+  const coulmnPossession = currentShape.coulmnPossession
+  const shapeColor = currentShape.shape.color;
+  let shapeFormIndex = currentShape.shapeFormIndex;
+
+
+  //removing the current shape from the tempBoard
+  for(let column = 0; column < shape.length ; column++ ){
+    for(let row = 0 ;row<shape[column].length;row++){
+      if(tempBoard[coulmnPossession+column][19-rowpossession-row].color===shapeColor){
+        tempBoard[coulmnPossession+column][19-rowpossession-row] = {isfull:false,color:"black"}
+      }
+    }
+  }
+
+
+  // checking if the form index is the last index in the shape so we could set it to 0  or increase it by one to get another shape
+  if(shapeFormIndex!==shapeObject.length-1){
+    shapeFormIndex++;
+  }else{
+    shapeFormIndex=0;
+  }
+
+  shape = shapeObject[shapeFormIndex]; //setting the shap into another form of the same shape
+
+  //checking if the new form of the shap can fit in the tempBoard
+  for(let column = 0; column < shape.length ; column++ ){
+    for(let row = 0 ;row<shape[column].length;row++){
+      if(tempBoard[coulmnPossession+column]?.[rowpossession+row]?.color!=='black')return false
+    }
+  }
+  return true
+}

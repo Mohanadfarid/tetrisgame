@@ -27,8 +27,16 @@ const currentShapeSlice = createSlice({
     moveDown: (state, action) => {
       state.rowpossession--
     },
+    rotate: (state,action) => {
+      const shape = state.shape.shape
+      if(state.shapeFormIndex!==shape.length-1){
+        state.shapeFormIndex++;
+      }else{
+        state.shapeFormIndex=0;
+      }
+    }
   },
 });
-export const { moveDown, moveLeft, moveRight, setcurrentShape } =
+export const { moveDown, moveLeft, moveRight, rotate, setcurrentShape } =
   currentShapeSlice.actions;
 export default currentShapeSlice.reducer;

@@ -8,12 +8,14 @@ import {
   moveDown,
   moveLeft,
   moveRight,
+  rotate,
   setcurrentShape,
 } from "../../features/currentShape/currentShapeSlice";
 import {
   checkIfShapeCanGoDown,
   checkIfShapeCanGoLeft,
   checkIfShapeCanGoRight,
+  checkIfShapeCanRotate,
   createShapObject,
 } from "../../utils/helpers";
 import { clearBoard } from "../../features/board/boardSlice";
@@ -40,6 +42,12 @@ const Board = () => {
       dispatch(moveDown(shapInfo));
     }
   }
+
+  const rotatingHanddler = ()=>{
+    if (checkIfShapeCanRotate(shapInfo, boardInfo)){
+      dispatch(rotate(shapInfo))
+    }
+  }
   return (
     <>
       <button
@@ -52,7 +60,7 @@ const Board = () => {
       <button onClick={movingLeftHanddler}>left</button>
       <button onClick={movingRightHanddler}>right</button>
       <button onClick={movingDownHanddler}>down</button>
-      {/* <button>rotate</button> */}
+      <button onClick={rotatingHanddler}>rotate</button>
       <button onClick={()=>{dispatch(clearBoard())}}>reset board</button>
       <div className={`${styles.boardBody}`}>
         {boardInfo.boardStats.map((columnInfo, columnidex) => (
