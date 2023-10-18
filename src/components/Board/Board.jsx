@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./board.module.css";
 import BoardColumn from "../boardColumn/BoardColumn";
@@ -24,6 +24,20 @@ const Board = () => {
   const dispatch = useDispatch();
   const boardInfo = useSelector((state) => state.board);
   const shapInfo = useSelector((state) => state.currentShape);
+  const [paused, setpaused] = useState(true);
+
+  useEffect(() => {
+    if (!paused) {
+      const interval = setInterval(() => {
+        if(checkIfShapeCanGoDown(shapInfo, boardInfo)){
+          dispatch(moveDown(shapInfo));
+        }else{
+          dispatch(setcurrentShape(createShapObject(randomShapeGenerator())));
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [paused,shapInfo,boardInfo,dispatch]);
 
   const movingLeftHanddler = () => {
     if (checkIfShapeCanGoLeft(shapInfo, boardInfo)) {
@@ -61,6 +75,7 @@ const Board = () => {
       <button onClick={movingRightHanddler}>right</button>
       <button onClick={movingDownHanddler}>down</button>
       <button onClick={rotatingHanddler}>rotate</button>
+      <button onClick={()=>setpaused(!paused)}>{paused?`resume`:`pause`}</button>
       <button onClick={()=>{dispatch(clearBoard())}}>reset board</button>
       <div className={`${styles.boardBody}`}>
         {boardInfo.boardStats.map((columnInfo, columnidex) => (

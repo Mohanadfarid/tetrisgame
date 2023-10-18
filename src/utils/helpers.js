@@ -271,7 +271,6 @@ export const checkIfShapeCanRotate = (currentShape, board) =>{
   //checking if the new form of the shap can fit in the tempBoard
   for(let column = 0; column < shape.length ; column++ ){
     for(let row = 0 ;row<shape[column].length;row++){
-      console.log(coulmnPossession+column,rowpossession+row)
       if(tempBoard[coulmnPossession+column]?.[19-rowpossession-row]?.color!=='black')return false
     }
   }
