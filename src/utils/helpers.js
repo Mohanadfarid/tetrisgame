@@ -178,13 +178,14 @@ export const createShapObject = ({ shape, position ,shapeFormIndex}) => {
 
 export const checkIfShapeCanGoLeft = (currentShape, board) => {
 
+  if (!currentShape.shape.color) return false //checking if the there is a shape
   const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
   const rowpossession = currentShape.rowpossession
   const coulmnPossession = currentShape.coulmnPossession
   const boardStats = board.boardStats
 
-// to do fix this condition shape[0]
-  if (!shape[0]||coulmnPossession===0)return false //checking if the there is a shape and the shap is not at the left edge
+  if (coulmnPossession===0)return false //checking if  shap is not at the left edge
+
   for (let row=0;row<shape[0].length;row++){
     if(boardStats[coulmnPossession-1][20-rowpossession-row-1].color!=='black'&&
     boardStats[coulmnPossession][20-rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
@@ -193,13 +194,16 @@ export const checkIfShapeCanGoLeft = (currentShape, board) => {
 };
 
 export const checkIfShapeCanGoRight = (currentShape, board) => {
+
+  if (!currentShape.shape.color) return false //checking if the there is a shape
+
   const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
   const rowpossession = currentShape.rowpossession
   const coulmnPossession = currentShape.coulmnPossession
   const boardStats = board.boardStats
 
   
-  if (!shape[0]||coulmnPossession+shape.length-1===9)return false //checking if the there is a shape and the shap is not at the right edge
+  if (coulmnPossession+shape.length-1===9)return false //checking if the shap is not at the right edge
   for (let row=0;row<shape[shape.length-1].length;row++){
     if(boardStats[coulmnPossession+shape.length][20-rowpossession-row-1].color!=='black'&&
     boardStats[coulmnPossession+shape.length-1][20-rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
@@ -208,12 +212,12 @@ export const checkIfShapeCanGoRight = (currentShape, board) => {
 };
 
 export const checkIfShapeCanGoDown = (currentShape, board) => {
+  if (!currentShape.shape.color) return false //checking if the there is a shape
 
   const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
   const rowpossession = currentShape.rowpossession
   const coulmnPossession = currentShape.coulmnPossession
   const boardStats = board.boardStats
-  // const shapeColor = currentShape.shape.color
 
     //finding the tallest coulmn so that we know the bottom limits to our shape
     let tallestCoulmn=0;
@@ -224,14 +228,8 @@ export const checkIfShapeCanGoDown = (currentShape, board) => {
     }
 
 
-  if (!shape[0]||rowpossession===0)return false //checking if the there is a shape and the shap is not at the bottom edge
+  if (rowpossession===0)return false //checking if the shap is not at the bottom edge
   for(let coulmn=0;coulmn<shape.length;coulmn++){
-    // console.log(`index:`,coulmnPossession+coulmn,19-rowpossession)
-    // console.log(`value:`,boardStats[coulmnPossession+coulmn][19-rowpossession].color)
-    // console.log()
-    // console.log(`index:`,coulmnPossession+coulmn,19-rowpossession+1)
-    // console.log(`value:`, boardStats[coulmnPossession+coulmn][19-rowpossession+1].color)
-    // console.log(`--------------------`)
     if((boardStats[coulmnPossession+coulmn][19-rowpossession].color!==`black`)&&
     boardStats[coulmnPossession+coulmn][19-rowpossession+1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
@@ -239,6 +237,9 @@ export const checkIfShapeCanGoDown = (currentShape, board) => {
 };
 
 export const checkIfShapeCanRotate = (currentShape, board) =>{
+
+  if (!currentShape.shape.color) return false //checking if the there is a shape
+
   const tempBoard =JSON.parse(JSON.stringify(board.boardStats))
   const shapeObject=currentShape.shape.shape
   let shape = currentShape.shape.shape[currentShape.shapeFormIndex]
