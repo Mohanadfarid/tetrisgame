@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initiaBoardlState } from "./initialBoardState";
-import { RotateShapAndRetrunboard, addShapeToBoardAndReturnboard, moveShapDownAndRetrunboard, moveShapToLeftAndRetrunboard, moveShapToRightAndRetrunboard } from "../../utils/helpers";
+import { RotateShapAndRetrunboard, addShapeToBoardAndReturnboard, deactivateAllBoardCells, moveShapDownAndRetrunboard, moveShapToLeftAndRetrunboard, moveShapToRightAndRetrunboard } from "../../utils/helpers";
 import { moveDown, moveLeft, moveRight, rotate, setcurrentShape } from "../currentShape/currentShapeSlice";
 
 const initialTops = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -20,9 +20,11 @@ const boardSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(setcurrentShape, (state, action) => {
+      //deactivating all the board cells so that the new shap will have the only active cells in the board
+      const deactivatedBoard = deactivateAllBoardCells(state.boardStats)
       state.boardStats = addShapeToBoardAndReturnboard(
         action.payload,
-        state.boardStats
+        deactivatedBoard
       );
     });
 

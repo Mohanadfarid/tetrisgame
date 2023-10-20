@@ -18,6 +18,16 @@ export const addShapeToBoardAndReturnboard = (currentShape, board) => {
   return NewBoard;
 };
 
+export const deactivateAllBoardCells =(board)=>{
+  const tempBoard=[...board]
+  for(let coulmn = 0;coulmn<tempBoard.length;coulmn++){
+    for(let row = 0; row<tempBoard[coulmn].length;row++){
+      tempBoard[coulmn][row].isactive=false;
+    }
+  }
+  return tempBoard
+}
+
 //a funciton to move the shape to left on the board
 export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
   const newBoard=[...board];
@@ -57,20 +67,42 @@ export const moveShapToRightAndRetrunboard=(currentShape,board)=>{
   const rowpossession = currentShape.rowpossession
   
 
-  //finding the tallest coulmn so that we could itarate over its rows
-  let tallestCoulmn=0;
-  for(let i =0;i<shape.length;i++){
-    if(shape[i].length>tallestCoulmn){
-      tallestCoulmn=shape[i].length
-    }
-  }
 
+  // for(let coulmn=shape.length-1;coulmn>=0;coulmn--){
+  //   for(let row=0;row<shape[coulmn].length;row++){
+  //     // console.log(`index:`,coulmnPossession+coulmn,19-rowpossession-row)
+  //     // console.log(`value:`,newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive)
+  //     // console.log(`-----------`)
+  //     if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive!==true&&coulmn===shape.length-1){}
+  //     else{
+  //       console.log(`one cell moved`)
+  //       console.log(`index:`,coulmnPossession+coulmn,19-rowpossession-row)
+  //       console.log(`value:`,newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive)
+  //       console.log(`-----------`)
+  //       newBoard[coulmnPossession+1+coulmn][19-rowpossession-row]=
+  //       newBoard[coulmnPossession+coulmn][19-rowpossession-row]
+  //     }
+  //     if(coulmn===0){
+  //       newBoard[coulmnPossession][19-rowpossession-row]={isactive:false,color:"black"}
+  //     }
+
+  //   }
+  // }
+
+  //fix later
   for(let coulmn=shape.length-1;coulmn>=0;coulmn--){
-    for(let row=0;row<tallestCoulmn;row++){
-      if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].color==='black'&&coulmn===shape.length-1){}
+    for(let row=0;row<shape[coulmn].length;row++){
+
+      if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive!==true&&coulmn===shape.length-1){}
       else{
-      newBoard[coulmnPossession+1+coulmn][19-rowpossession-row]=
-      newBoard[coulmnPossession+coulmn][19-rowpossession-row]
+        if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive===true){
+          console.log(`one cell moved`)
+          console.log(`index:`,coulmnPossession+coulmn,19-rowpossession-row)
+          console.log(`value:`,newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive)
+          console.log(`-----------`)
+          newBoard[coulmnPossession+1+coulmn][19-rowpossession-row]=
+          newBoard[coulmnPossession+coulmn][19-rowpossession-row]
+        }
       }
       if(coulmn===0){
         newBoard[coulmnPossession][19-rowpossession-row]={isactive:false,color:"black"}
