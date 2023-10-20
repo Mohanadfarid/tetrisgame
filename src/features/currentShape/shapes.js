@@ -23,18 +23,18 @@ const cyanIBlock = {
     //first form
     [
       [
-        { isfull: true, color: cyan },
-        { isfull: true, color: cyan },
-        { isfull: true, color: cyan },
-        { isfull: true, color: cyan },
+        { isactive: true, color: cyan },
+        { isactive: true, color: cyan },
+        { isactive: true, color: cyan },
+        { isactive: true, color: cyan },
       ],
     ],
     //second form
     [
-      [{ isfull: true, color: cyan }],
-      [{ isfull: true, color: cyan }],
-      [{ isfull: true, color: cyan }],
-      [{ isfull: true, color: cyan }],
+      [{ isactive: true, color: cyan }],
+      [{ isactive: true, color: cyan }],
+      [{ isactive: true, color: cyan }],
+      [{ isactive: true, color: cyan }],
     ],
   ]
 }
@@ -44,48 +44,48 @@ const blueJBlock = {
   shape:[
     //first form
     [
-      [{ isfull: true, color: blue }],
+      [{ isactive: true, color: blue }],
       [
-        { isfull: true, color: blue },
-        { isfull: true, color: blue },
-        { isfull: true, color: blue },
+        { isactive: true, color: blue },
+        { isactive: true, color: blue },
+        { isactive: true, color: blue },
       ],
     ],
     //second form
     [
       [
-        { isfull: true, color: blue },
-        { isfull: true, color: blue },
+        { isactive: true, color: blue },
+        { isactive: true, color: blue },
       ],
-      [{ isfull: true, color: blue }],
-      [{ isfull: true, color: blue }],
+      [{ isactive: true, color: blue }],
+      [{ isactive: true, color: blue }],
     ],
     // thered form
     [
       [
-        { isfull: true, color: blue },
-        { isfull: true, color: blue },
-        { isfull: true, color: blue },
+        { isactive: true, color: blue },
+        { isactive: true, color: blue },
+        { isactive: true, color: blue },
       ],
       [
-        { isfull: false, color: black },
-        { isfull: false, color: black },
-        { isfull: true, color: blue },
+        { isactive: false, color: black },
+        { isactive: false, color: black },
+        { isactive: true, color: blue },
       ],
     ],
     //forth form
     [
       [
-        { isfull: false, color: black },
-        { isfull: true, color: blue },
+        { isactive: false, color: black },
+        { isactive: true, color: blue },
       ],
       [
-        { isfull: false, color: black },
-        { isfull: true, color: blue },
+        { isactive: false, color: black },
+        { isactive: true, color: blue },
       ],
       [
-        { isfull: true, color: blue },
-        { isfull: true, color: blue },
+        { isactive: true, color: blue },
+        { isactive: true, color: blue },
       ],
     ],
   ]
@@ -97,47 +97,47 @@ const orangeLBlock = {
     //first form
     [
       [
-        { isfull: true, color: orange },
-        { isfull: true, color: orange },
-        { isfull: true, color: orange },
+        { isactive: true, color: orange },
+        { isactive: true, color: orange },
+        { isactive: true, color: orange },
       ],
-      [{ isfull: true, color: orange }],
+      [{ isactive: true, color: orange }],
     ],
     //second form
     [
       [
-        { isfull: true, color: orange },
-        { isfull: true, color: orange },
+        { isactive: true, color: orange },
+        { isactive: true, color: orange },
       ],
       [
-        { isfull: false, color: black },
-        { isfull: true, color: orange },
+        { isactive: false, color: black },
+        { isactive: true, color: orange },
       ],
       [
-        { isfull: false, color: black },
-        { isfull: true, color: orange },
+        { isactive: false, color: black },
+        { isactive: true, color: orange },
       ],
     ],
     // thered form
     [
       [
-        { isfull: false, color: black },
-        { isfull: false, color: black },
-        { isfull: true, color: orange },
+        { isactive: false, color: black },
+        { isactive: false, color: black },
+        { isactive: true, color: orange },
       ],
       [
-        { isfull: true, color: orange },
-        { isfull: true, color: orange },
-        { isfull: true, color: orange },
+        { isactive: true, color: orange },
+        { isactive: true, color: orange },
+        { isactive: true, color: orange },
       ],
     ],
     //forth form
     [
-      [{ isfull: true, color: orange }],
-      [{ isfull: true, color: orange }],
+      [{ isactive: true, color: orange }],
+      [{ isactive: true, color: orange }],
       [
-        { isfull: true, color: orange },
-        { isfull: true, color: orange },
+        { isactive: true, color: orange },
+        { isactive: true, color: orange },
       ],
     ],
   ]
@@ -148,12 +148,12 @@ const yellowOBlock = {
   shape:[
     [
       [
-        { isfull: true, color: yellow },
-        { isfull: true, color: yellow },
+        { isactive: true, color: yellow },
+        { isactive: true, color: yellow },
       ],
       [
-        { isfull: true, color: yellow },
-        { isfull: true, color: yellow },
+        { isactive: true, color: yellow },
+        { isactive: true, color: yellow },
       ],
     ],
   ]
@@ -164,26 +164,26 @@ const greenSBlock = {
   shape:[
     //first form
     [
-      [{ isfull: true, color: green }],
+      [{ isactive: true, color: green }],
       [
-        { isfull: true, color: green },
-        { isfull: true, color: green },
+        { isactive: true, color: green },
+        { isactive: true, color: green },
       ],
       [
-        { isfull: false, color: black },
-        { isfull: true, color: green },
+        { isactive: false, color: black },
+        { isactive: true, color: green },
       ],
     ],
     //second form
     [
       [
-        { isfull: false, color: black },
-        { isfull: true, color: green },
-        { isfull: true, color: green },
+        { isactive: false, color: black },
+        { isactive: true, color: green },
+        { isactive: true, color: green },
       ],
       [
-        { isfull: true, color: green },
-        { isfull: true, color: green },
+        { isactive: true, color: green },
+        { isactive: true, color: green },
       ],
     ],
   ]
@@ -195,49 +195,49 @@ const purpleTBlock = {
     //first form
     [
       [
-        { isfull: false, color: black },
-        { isfull: true, color: purple },
+        { isactive: false, color: black },
+        { isactive: true, color: purple },
       ],
       [
-        { isfull: true, color: purple },
-        { isfull: true, color: purple },
+        { isactive: true, color: purple },
+        { isactive: true, color: purple },
       ],
       [
-        { isfull: false, color: black },
-        { isfull: true, color: purple },
+        { isactive: false, color: black },
+        { isactive: true, color: purple },
       ],
     ],
     [
       //second form
       [
-        { isfull: false, color: black },
-        { isfull: true, color: purple },
+        { isactive: false, color: black },
+        { isactive: true, color: purple },
       ],
       [
-        { isfull: true, color: purple },
-        { isfull: true, color: purple },
-        { isfull: true, color: purple },
+        { isactive: true, color: purple },
+        { isactive: true, color: purple },
+        { isactive: true, color: purple },
       ],
     ],
     //thered form
     [
-      [{ isfull: true, color: purple }],
+      [{ isactive: true, color: purple }],
       [
-        { isfull: true, color: purple },
-        { isfull: true, color: purple },
+        { isactive: true, color: purple },
+        { isactive: true, color: purple },
       ],
-      [{ isfull: true, color: purple }],
+      [{ isactive: true, color: purple }],
     ],
     //forth form
     [
       [
-        { isfull: true, color: purple },
-        { isfull: true, color: purple },
-        { isfull: true, color: purple },
+        { isactive: true, color: purple },
+        { isactive: true, color: purple },
+        { isactive: true, color: purple },
       ],
       [
-        { isfull: false, color: black },
-        { isfull: true, color: purple },
+        { isactive: false, color: black },
+        { isactive: true, color: purple },
       ],
     ],
   ]
@@ -249,25 +249,25 @@ const redZBlock = {
     //first form
     [
       [
-        { isfull: false, color: black },
-        { isfull: true, color: red },
+        { isactive: false, color: black },
+        { isactive: true, color: red },
       ],
       [
-        { isfull: true, color: red },
-        { isfull: true, color: red },
+        { isactive: true, color: red },
+        { isactive: true, color: red },
       ],
-      [{ isfull: true, color: red }],
+      [{ isactive: true, color: red }],
     ],
     //second form
     [
       [
-        { isfull: true, color: red },
-        { isfull: true, color: red },
+        { isactive: true, color: red },
+        { isactive: true, color: red },
       ],
       [
-        { isfull: false, color: black },
-        { isfull: true, color: red },
-        { isfull: true, color: red },
+        { isactive: false, color: black },
+        { isactive: true, color: red },
+        { isactive: true, color: red },
       ],
     ],
   ]

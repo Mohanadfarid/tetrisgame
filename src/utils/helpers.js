@@ -41,7 +41,7 @@ export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
         newBoard[coulmnPossession+coulmn][19-rowpossession-row]
       }
       if(coulmn===shape.length-1){
-        newBoard[coulmnPossession+shape.length-1][19-rowpossession-row]={isfull:false,color:"black"}
+        newBoard[coulmnPossession+shape.length-1][19-rowpossession-row]={isactive:false,color:"black"}
       }
 
     }
@@ -73,7 +73,7 @@ export const moveShapToRightAndRetrunboard=(currentShape,board)=>{
       newBoard[coulmnPossession+coulmn][19-rowpossession-row]
       }
       if(coulmn===0){
-        newBoard[coulmnPossession][19-rowpossession-row]={isfull:false,color:"black"}
+        newBoard[coulmnPossession][19-rowpossession-row]={isactive:false,color:"black"}
       }
 
     }
@@ -105,7 +105,7 @@ export const moveShapDownAndRetrunboard=(currentShape,board)=>{
       }
     }
     if(shape[coulmn].length===tallestCoulmn){
-      newBoard[coulmnPossession+coulmn][19-rowpossession-tallestCoulmn+1]={isfull:false,color:"black"}
+      newBoard[coulmnPossession+coulmn][19-rowpossession-tallestCoulmn+1]={isactive:false,color:"black"}
     }
   }
   return newBoard;
@@ -124,7 +124,7 @@ export const RotateShapAndRetrunboard=(currentShape,board)=>{
     for(let column = 0; column < shape.length ; column++ ){
       for(let row = 0 ;row<shape[column].length;row++){
         if(tempBoard[coulmnPossession+column][19-rowpossession-row].color===shapeColor){
-          tempBoard[coulmnPossession+column][19-rowpossession-row] = {isfull:false,color:"black"}
+          tempBoard[coulmnPossession+column][19-rowpossession-row] = {isactive:false,color:"black"}
         }
       }
     }
@@ -253,7 +253,7 @@ export const checkIfShapeCanRotate = (currentShape, board) =>{
   for(let column = 0; column < shape.length ; column++ ){
     for(let row = 0 ;row<shape[column].length;row++){
       if(tempBoard[coulmnPossession+column][19-rowpossession-row].color===shapeColor){
-        tempBoard[coulmnPossession+column][19-rowpossession-row] = {isfull:false,color:"black"}
+        tempBoard[coulmnPossession+column][19-rowpossession-row] = {isactive:false,color:"black"}
       }
     }
   }
