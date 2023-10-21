@@ -28,32 +28,38 @@ export const deactivateAllBoardCells =(board)=>{
   return tempBoard
 }
 
-//a funciton to move the shape to left on the board
-export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
+const removeShapfromBoard=(currentShape,board)=>{
   const newBoard=[...board];
   const shape=currentShape.shape.shape[currentShape.shapeFormIndex];
   const coulmnPossession = currentShape.coulmnPossession;
   const rowpossession = currentShape.rowpossession
-  
-  //finding the tallest coulmn so that we could itarate over its rows
-  let tallestCoulmn=0;
-  for(let i =0;i<shape.length;i++){
-    if(shape[i].length>tallestCoulmn){
-      tallestCoulmn=shape[i].length
+
+  for(let coulmn=shape.length-1;coulmn>=0;coulmn--){
+    for(let row=0;row<shape[coulmn].length;row++){
+      if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive===true){ //making sure we are only removing the current shape cells
+        newBoard[coulmnPossession+coulmn][19-rowpossession-row]={isactive:false,color:"black"}
+      }
     }
   }
+  return newBoard
+}
 
-  for(let coulmn=0;coulmn<shape.length;coulmn++){
-    for(let row=0;row<tallestCoulmn;row++){//19
-      if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].color==='black'&&coulmn===0){}
-      else{
-        newBoard[coulmnPossession-1+coulmn][19-rowpossession-row]=
-        newBoard[coulmnPossession+coulmn][19-rowpossession-row]
-      }
-      if(coulmn===shape.length-1){
-        newBoard[coulmnPossession+shape.length-1][19-rowpossession-row]={isactive:false,color:"black"}
-      }
+//a funciton to move the shape to left on the board
+export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
+  let newBoard=[...board];
+  const shape=currentShape.shape.shape[currentShape.shapeFormIndex];
+  const coulmnPossession = currentShape.coulmnPossession;
+  const rowpossession = currentShape.rowpossession
+ 
+  //removing the current shape
+  newBoard = [...removeShapfromBoard(currentShape,board)]
 
+  //adding current shape again at old columnPossession-1
+  for(let coulmn=shape.length-1;coulmn>=0;coulmn--){
+    for(let row=0;row<shape[coulmn].length;row++){
+      if(shape[coulmn][row].isactive===true){ //making sure not to override another shape with current's shape black cells
+      newBoard[coulmnPossession+coulmn-1][19-rowpossession-row]=shape[coulmn][row]
+      }
     }
   }
 
@@ -61,105 +67,59 @@ return newBoard;
 }
 
 export const moveShapToRightAndRetrunboard=(currentShape,board)=>{
-  const newBoard=[...board];
+  let newBoard=[...board];
   const shape = currentShape.shape.shape[currentShape.shapeFormIndex];
   const coulmnPossession = currentShape.coulmnPossession;
   const rowpossession = currentShape.rowpossession
-  
+
+  //removing the current shape
+  newBoard = [...removeShapfromBoard(currentShape,board)]
 
 
-  // for(let coulmn=shape.length-1;coulmn>=0;coulmn--){
-  //   for(let row=0;row<shape[coulmn].length;row++){
-  //     // console.log(`index:`,coulmnPossession+coulmn,19-rowpossession-row)
-  //     // console.log(`value:`,newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive)
-  //     // console.log(`-----------`)
-  //     if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive!==true&&coulmn===shape.length-1){}
-  //     else{
-  //       console.log(`one cell moved`)
-  //       console.log(`index:`,coulmnPossession+coulmn,19-rowpossession-row)
-  //       console.log(`value:`,newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive)
-  //       console.log(`-----------`)
-  //       newBoard[coulmnPossession+1+coulmn][19-rowpossession-row]=
-  //       newBoard[coulmnPossession+coulmn][19-rowpossession-row]
-  //     }
-  //     if(coulmn===0){
-  //       newBoard[coulmnPossession][19-rowpossession-row]={isactive:false,color:"black"}
-  //     }
-
-  //   }
-  // }
-
-  //fix later
+  //adding current shape again at old coulmnPossession + 1
   for(let coulmn=shape.length-1;coulmn>=0;coulmn--){
     for(let row=0;row<shape[coulmn].length;row++){
-
-      if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive!==true&&coulmn===shape.length-1){}
-      else{
-        if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive===true){
-          console.log(`one cell moved`)
-          console.log(`index:`,coulmnPossession+coulmn,19-rowpossession-row)
-          console.log(`value:`,newBoard[coulmnPossession+coulmn][19-rowpossession-row].isactive)
-          console.log(`-----------`)
-          newBoard[coulmnPossession+1+coulmn][19-rowpossession-row]=
-          newBoard[coulmnPossession+coulmn][19-rowpossession-row]
-        }
+      if(shape[coulmn][row].isactive===true){ //making sure not to override another shape with current's shape black cells
+        newBoard[coulmnPossession+coulmn+1][19-rowpossession-row]=shape[coulmn][row]
       }
-      if(coulmn===0){
-        newBoard[coulmnPossession][19-rowpossession-row]={isactive:false,color:"black"}
-      }
-
     }
   }
-
+  
 return newBoard;
 }
 
 export const moveShapDownAndRetrunboard=(currentShape,board)=>{
-  const newBoard=[...board];
+  let newBoard=[...board];
   const shape = currentShape.shape.shape[currentShape.shapeFormIndex];
   const coulmnPossession = currentShape.coulmnPossession;
   const rowpossession = currentShape.rowpossession
 
-    //finding the tallest coulmn so that we could itarate over its rows
-    let tallestCoulmn=0;
-    for(let i =0;i<shape.length;i++){
-      if(shape[i].length>tallestCoulmn){
-        tallestCoulmn=shape[i].length
-      }
-    }
 
-  for(let coulmn=0;coulmn<shape.length;coulmn++){
-    for(let row = 0;row<tallestCoulmn;row++){
-      if(newBoard[coulmnPossession+coulmn][19-rowpossession-row].color==='black'&&row===0){}
-      else{
-        newBoard[coulmnPossession+coulmn][19-rowpossession-row+1]=
-        newBoard[coulmnPossession+coulmn][19-rowpossession-row]
+  //removing the current shape
+  newBoard = [...removeShapfromBoard(currentShape,board)]
+
+  //adding current shape again at old row + 1
+  for(let coulmn=shape.length-1;coulmn>=0;coulmn--){
+    for(let row=0;row<shape[coulmn].length;row++){
+      if(shape[coulmn][row].isactive===true){//making sure not to override another shape with current's shape black cells
+      newBoard[coulmnPossession+coulmn][19-rowpossession-row+1]=shape[coulmn][row]
       }
-    }
-    if(shape[coulmn].length===tallestCoulmn){
-      newBoard[coulmnPossession+coulmn][19-rowpossession-tallestCoulmn+1]={isactive:false,color:"black"}
     }
   }
+
   return newBoard;
 }
 
 export const RotateShapAndRetrunboard=(currentShape,board)=>{
-  const tempBoard =JSON.parse(JSON.stringify(board))
+  let tempBoard =JSON.parse(JSON.stringify(board))
   const shapeObject=currentShape.shape.shape
   let shape = currentShape.shape.shape[currentShape.shapeFormIndex]
   const rowpossession = currentShape.rowpossession
   const coulmnPossession = currentShape.coulmnPossession
-  const shapeColor = currentShape.shape.color;
   let shapeFormIndex = currentShape.shapeFormIndex;
 
     //removing the current shape from the tempBoard
-    for(let column = 0; column < shape.length ; column++ ){
-      for(let row = 0 ;row<shape[column].length;row++){
-        if(tempBoard[coulmnPossession+column][19-rowpossession-row].color===shapeColor){
-          tempBoard[coulmnPossession+column][19-rowpossession-row] = {isactive:false,color:"black"}
-        }
-      }
-    }
+    tempBoard = [...removeShapfromBoard(currentShape,board)]
   
   
     // checking if the form index is the last index in the shape so we could set it to 0  or increase it by one to get another shape

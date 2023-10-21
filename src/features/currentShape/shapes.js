@@ -18,8 +18,8 @@ const red = colors[6];
 const black = colors[7];
 
 const cyanIBlock = {
-  color:cyan,
-  shape:[
+  color: cyan,
+  shape: [
     //first form
     [
       [
@@ -36,15 +36,19 @@ const cyanIBlock = {
       [{ isactive: true, color: cyan }],
       [{ isactive: true, color: cyan }],
     ],
-  ]
-}
+  ],
+};
 
 const blueJBlock = {
-  color:blue,
-  shape:[
+  color: blue,
+  shape: [
     //first form
     [
-      [{ isactive: true, color: blue }],
+      [
+        { isactive: true, color: blue },
+        { isactive: false, color: black },
+        { isactive: false, color: black },
+      ],
       [
         { isactive: true, color: blue },
         { isactive: true, color: blue },
@@ -57,8 +61,14 @@ const blueJBlock = {
         { isactive: true, color: blue },
         { isactive: true, color: blue },
       ],
-      [{ isactive: true, color: blue }],
-      [{ isactive: true, color: blue }],
+      [
+        { isactive: true, color: blue },
+        { isactive: false, color: black },
+      ],
+      [
+        { isactive: true, color: blue },
+        { isactive: false, color: black },
+      ],
     ],
     // thered form
     [
@@ -88,12 +98,12 @@ const blueJBlock = {
         { isactive: true, color: blue },
       ],
     ],
-  ]
-}
+  ],
+};
 
 const orangeLBlock = {
-  color:orange,
-  shape:[
+  color: orange,
+  shape: [
     //first form
     [
       [
@@ -101,7 +111,11 @@ const orangeLBlock = {
         { isactive: true, color: orange },
         { isactive: true, color: orange },
       ],
-      [{ isactive: true, color: orange }],
+      [
+        { isactive: true, color: orange },
+        { isactive: false, color: black },
+        { isactive: false, color: black },
+      ],
     ],
     //second form
     [
@@ -133,19 +147,25 @@ const orangeLBlock = {
     ],
     //forth form
     [
-      [{ isactive: true, color: orange }],
-      [{ isactive: true, color: orange }],
+      [
+        { isactive: true, color: orange },
+        { isactive: false, color: black },
+      ],
+      [
+        { isactive: true, color: orange },
+        { isactive: false, color: black },
+      ],
       [
         { isactive: true, color: orange },
         { isactive: true, color: orange },
       ],
     ],
-  ]
-}
+  ],
+};
 
 const yellowOBlock = {
-  color:yellow,
-  shape:[
+  color: yellow,
+  shape: [
     [
       [
         { isactive: true, color: yellow },
@@ -156,15 +176,18 @@ const yellowOBlock = {
         { isactive: true, color: yellow },
       ],
     ],
-  ]
-}
+  ],
+};
 
 const greenSBlock = {
-  color:green,
-  shape:[
+  color: green,
+  shape: [
     //first form
     [
-      [{ isactive: true, color: green }],
+      [
+        { isactive: true, color: green },
+        { isactive: false, color: black },
+      ],
       [
         { isactive: true, color: green },
         { isactive: true, color: green },
@@ -184,14 +207,15 @@ const greenSBlock = {
       [
         { isactive: true, color: green },
         { isactive: true, color: green },
+        { isactive: false, color: black },
       ],
     ],
-  ]
-}
+  ],
+};
 
 const purpleTBlock = {
-  color:purple,
-  shape:[
+  color: purple,
+  shape: [
     //first form
     [
       [
@@ -212,6 +236,7 @@ const purpleTBlock = {
       [
         { isactive: false, color: black },
         { isactive: true, color: purple },
+        { isactive: false, color: black },
       ],
       [
         { isactive: true, color: purple },
@@ -221,12 +246,18 @@ const purpleTBlock = {
     ],
     //thered form
     [
-      [{ isactive: true, color: purple }],
+      [
+        { isactive: true, color: purple },
+        { isactive: false, color: black },
+      ],
       [
         { isactive: true, color: purple },
         { isactive: true, color: purple },
       ],
-      [{ isactive: true, color: purple }],
+      [
+        { isactive: true, color: purple },
+        { isactive: false, color: black },
+      ],
     ],
     //forth form
     [
@@ -238,14 +269,15 @@ const purpleTBlock = {
       [
         { isactive: false, color: black },
         { isactive: true, color: purple },
+        { isactive: false, color: black },
       ],
     ],
-  ]
-}
+  ],
+};
 
 const redZBlock = {
-  color:red,
-  shape:[
+  color: red,
+  shape: [
     //first form
     [
       [
@@ -256,13 +288,18 @@ const redZBlock = {
         { isactive: true, color: red },
         { isactive: true, color: red },
       ],
-      [{ isactive: true, color: red }],
+      [
+        { isactive: true, color: red },
+        { isactive: false, color: black },
+      ],
     ],
     //second form
     [
       [
+
         { isactive: true, color: red },
         { isactive: true, color: red },
+        { isactive: false, color: black }
       ],
       [
         { isactive: false, color: black },
@@ -270,8 +307,8 @@ const redZBlock = {
         { isactive: true, color: red },
       ],
     ],
-  ]
-}
+  ],
+};
 
 const shapes = {
   1: cyanIBlock,
@@ -294,6 +331,10 @@ export const randomShapeGenerator = () => {
       Math.random() * (9 - RowrandomShape.shape[randomformIndex].length - 0 + 1)
     ) + 0;
 
-  return {shape:RowrandomShape,position:randomStartingIndex,shapeFormIndex:randomformIndex};
+  return {
+    shape: RowrandomShape,
+    position: randomStartingIndex,
+    shapeFormIndex: randomformIndex,
+  };
 };
 // to do later create func to generate random shape with random positon and random rotate
