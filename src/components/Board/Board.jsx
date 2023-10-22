@@ -19,12 +19,15 @@ import {
   createShapObject,
 } from "../../utils/helpers";
 import { clearBoard } from "../../features/board/boardSlice";
+import Cell from "../cell/Cell";
 
 const Board = () => {
   const dispatch = useDispatch();
   const boardInfo = useSelector((state) => state.board);
   const shapInfo = useSelector((state) => state.currentShape);
   const [paused, setpaused] = useState(true);
+  const [nextShape, setnextShape] = useState(createShapObject(randomShapeGenerator()));
+
 
   useEffect(() => {
     if (!paused) {
@@ -32,12 +35,13 @@ const Board = () => {
         if(checkIfShapeCanGoDown(shapInfo, boardInfo)){
           dispatch(moveDown(shapInfo));
         }else{
-          dispatch(setcurrentShape(createShapObject(randomShapeGenerator())));
+          dispatch(setcurrentShape(nextShape));
+          setnextShape(createShapObject(randomShapeGenerator()))
         }
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [paused,shapInfo,boardInfo,dispatch]);
+  }, [paused,shapInfo,boardInfo,dispatch,nextShape]);
 
   const movingLeftHanddler = () => {
     if (checkIfShapeCanGoLeft(shapInfo, boardInfo)) {
@@ -66,7 +70,8 @@ const Board = () => {
     <>
       <button
         onClick={() => {
-          dispatch(setcurrentShape(createShapObject(randomShapeGenerator())));
+          dispatch(setcurrentShape(nextShape));
+          setnextShape(createShapObject(randomShapeGenerator()))
         }}
       >
         start game
@@ -77,11 +82,23 @@ const Board = () => {
       <button onClick={rotatingHanddler}>rotate</button>
       <button onClick={()=>setpaused(!paused)}>{paused?`resume`:`pause`}</button>
       <button onClick={()=>{dispatch(clearBoard())}}>reset board</button>
+      
+      
       <div className={`${styles.boardBody}`}>
         {boardInfo.boardStats.map((columnInfo, columnidex) => (
           <BoardColumn key={columnidex} columnInfo={columnInfo} />
         ))}
       </div>
+
+      <div className={`${styles.nextShapContainer}`}>
+          {
+            nextShape.shape.shape[nextShape.shapeFormIndex].map((columnInfo)=>{
+              return <div className={`${styles.column}`}>{columnInfo.map((cellInfo)=> <div style={{backgroundColor:`${cellInfo.color}`}} className={`${styles.cell}`}></div>)}</div>
+            }
+            )
+          }
+        </div> 
+
     </>
   );
 };
