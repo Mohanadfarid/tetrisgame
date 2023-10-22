@@ -93,7 +93,10 @@ const Board = () => {
       <div className={`${styles.nextShapContainer}`}>
           {
             nextShape.shape.shape[nextShape.shapeFormIndex].map((columnInfo)=>{
-              return <div className={`${styles.column}`}>{columnInfo.map((cellInfo)=> <div style={{backgroundColor:`${cellInfo.color}`}} className={`${styles.cell}`}></div>)}</div>
+              let tempColumnInfo =JSON.parse(JSON.stringify(columnInfo)).reverse()
+              return <div className={`${styles.column}`}>
+              {tempColumnInfo.map((cellInfo)=> <div style={{backgroundColor:`${cellInfo.color}`}} className={`${styles.cell}`}></div>
+              )}</div>
             }
             )
           }
