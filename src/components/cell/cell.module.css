@@ -26,3 +26,6 @@
 .red{
     background-color: red;
 }
+.active{
+    border: 1px solid black !important;
+}
