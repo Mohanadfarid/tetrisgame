@@ -151,15 +151,12 @@ export const createShapObject = ({ shape, position ,shapeFormIndex}) => {
     isActive: false,
   };
   shapeObject.isActive = true;
-
+  const tempShape=shapeObject.shape.shape[shapeFormIndex]
   let maxRowHight = 0;
-  for (
-    let coulmnIndex = 0;
-    coulmnIndex < shapeObject.shape.shape[shapeFormIndex].length;
-    coulmnIndex++
-  ) {
-    if (shapeObject.shape.shape[shapeFormIndex][coulmnIndex].length > maxRowHight) {
-      maxRowHight = shapeObject.shape.shape[shapeFormIndex][coulmnIndex].length;
+
+  for (let coulmnIndex = 0;coulmnIndex < tempShape.length;coulmnIndex++) {
+    if (tempShape[coulmnIndex].length > maxRowHight) {
+      maxRowHight = tempShape[coulmnIndex].length;
     }
   }
   shapeObject.rowpossession = 20 - maxRowHight;
@@ -176,7 +173,7 @@ export const checkIfShapeCanGoLeft = (currentShape, board) => {
   const coulmnPossession = currentShape.coulmnPossession
   const boardStats = board.boardStats
 
-  if (coulmnPossession===0)return false //checking if  shap is not at the left edge
+  if (coulmnPossession===0)return false //checking if  shape is not at the left edge
 
   for (let row=0;row<shape[0].length;row++){
     if(boardStats[coulmnPossession-1][20-rowpossession-row-1].color!=='black'&&
@@ -188,14 +185,13 @@ export const checkIfShapeCanGoLeft = (currentShape, board) => {
 export const checkIfShapeCanGoRight = (currentShape, board) => {
 
   if (!currentShape.shape.color) return false //checking if the there is a shape
-
   const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
   const rowpossession = currentShape.rowpossession
   const coulmnPossession = currentShape.coulmnPossession
   const boardStats = board.boardStats
 
-  
   if (coulmnPossession+shape.length-1===9)return false //checking if the shap is not at the right edge
+
   for (let row=0;row<shape[shape.length-1].length;row++){
     if(boardStats[coulmnPossession+shape.length][20-rowpossession-row-1].color!=='black'&&
     boardStats[coulmnPossession+shape.length-1][20-rowpossession-row-1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
@@ -204,27 +200,28 @@ export const checkIfShapeCanGoRight = (currentShape, board) => {
 };
 
 export const checkIfShapeCanGoDown = (currentShape, board) => {
+
   if (!currentShape.shape.color) return false //checking if the there is a shape
 
   const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
   const rowpossession = currentShape.rowpossession
   const coulmnPossession = currentShape.coulmnPossession
-  const boardStats = board.boardStats
+  let tempBoard =JSON.parse(JSON.stringify(board.boardStats))
 
-    //finding the tallest coulmn so that we know the bottom limits to our shape
-    let tallestCoulmn=0;
-    for(let i =0;i<shape.length;i++){
-      if(shape[i].length>tallestCoulmn){
-        tallestCoulmn=shape[i].length
+  if(rowpossession===0)return false
+  
+  //removing the shap from the board temporary
+  tempBoard = [...removeShapfromBoard(currentShape,tempBoard)]
+
+  //checking the current shape at old row possession - 1
+  for(let coulmn=shape.length-1;coulmn>=0;coulmn--){
+    for(let row=0;row<shape[coulmn].length;row++){
+      if(shape[coulmn][row].isactive===true){ // only checking the shape's active cells
+        if(tempBoard[coulmnPossession+coulmn][19-rowpossession-row+1].color!=='black')return false //checking if the shap n
       }
     }
-
-
-  if (rowpossession===0)return false //checking if the shap is not at the bottom edge
-  for(let coulmn=0;coulmn<shape.length;coulmn++){
-    if((boardStats[coulmnPossession+coulmn][19-rowpossession].color!==`black`)&&
-    boardStats[coulmnPossession+coulmn][19-rowpossession+1].color!=='black')return false  //if there is not atleast one black cell in the last coulmn or the next to it return false
   }
+  
   return true
 };
 
@@ -232,23 +229,16 @@ export const checkIfShapeCanRotate = (currentShape, board) =>{
 
   if (!currentShape.shape.color) return false //checking if the there is a shape
 
-  const tempBoard =JSON.parse(JSON.stringify(board.boardStats))
+  let tempBoard =JSON.parse(JSON.stringify(board.boardStats))
   const shapeObject=currentShape.shape.shape
   let shape = currentShape.shape.shape[currentShape.shapeFormIndex]
   const rowpossession = currentShape.rowpossession
   const coulmnPossession = currentShape.coulmnPossession
-  const shapeColor = currentShape.shape.color;
   let shapeFormIndex = currentShape.shapeFormIndex;
 
 
   //removing the current shape from the tempBoard
-  for(let column = 0; column < shape.length ; column++ ){
-    for(let row = 0 ;row<shape[column].length;row++){
-      if(tempBoard[coulmnPossession+column][19-rowpossession-row].color===shapeColor){
-        tempBoard[coulmnPossession+column][19-rowpossession-row] = {isactive:false,color:"black"}
-      }
-    }
-  }
+  tempBoard = [...removeShapfromBoard(currentShape,tempBoard)]
 
 
   // checking if the form index is the last index in the shape so we could set it to 0  or increase it by one to get another shape
