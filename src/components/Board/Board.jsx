@@ -16,10 +16,10 @@ import {
   checkIfShapeCanGoLeft,
   checkIfShapeCanGoRight,
   checkIfShapeCanRotate,
-  createShapObject,
-} from "../../utils/helpers";
+} from "../../utils/helpers/checkersHelpers";
 import { clearBoard } from "../../features/board/boardSlice";
-import Cell from "../cell/Cell";
+import { createShapObject } from "../../utils/helpers/generalHelpers";
+
 
 const Board = () => {
   const dispatch = useDispatch();

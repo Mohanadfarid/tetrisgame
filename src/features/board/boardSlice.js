@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initiaBoardlState } from "./initialBoardState";
-import { RotateShapAndRetrunboard, addShapeToBoardAndReturnboard, deactivateAllBoardCells, moveShapDownAndRetrunboard, moveShapToLeftAndRetrunboard, moveShapToRightAndRetrunboard } from "../../utils/helpers";
 import { moveDown, moveLeft, moveRight, rotate, setcurrentShape } from "../currentShape/currentShapeSlice";
+import { addShapeToBoardAndReturnboard, deactivateAllBoardCells } from "../../utils/helpers/generalHelpers";
+import { RotateShapAndRetrunboard, moveShapDownAndRetrunboard, moveShapToLeftAndRetrunboard, moveShapToRightAndRetrunboard } from "../../utils/helpers/movementHelpers";
 
 const initialTops = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const boardSlice = createSlice({
