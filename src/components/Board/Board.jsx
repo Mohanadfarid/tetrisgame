@@ -19,6 +19,7 @@ import {
 } from "../../utils/helpers/checkersHelpers";
 import { clearBoard } from "../../features/board/boardSlice";
 import { createShapObject } from "../../utils/helpers/generalHelpers";
+import NextShape from "../NextShap/NextShape";
 
 
 const Board = () => {
@@ -89,19 +90,7 @@ const Board = () => {
           <BoardColumn key={columnidex} columnInfo={columnInfo} />
         ))}
       </div>
-
-      <div className={`${styles.nextShapContainer}`}>
-          {
-            nextShape.shape.shape[nextShape.shapeFormIndex].map((columnInfo)=>{
-              let tempColumnInfo =JSON.parse(JSON.stringify(columnInfo)).reverse()
-              return <div className={`${styles.column}`}>
-              {tempColumnInfo.map((cellInfo)=> <div style={{backgroundColor:`${cellInfo.color}`}} className={`${styles.cell}`}></div>
-              )}</div>
-            }
-            )
-          }
-        </div> 
-
+      <NextShape nextShape={nextShape}/>
     </>
   );
 };
