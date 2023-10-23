@@ -4,9 +4,13 @@ import { moveDown, moveLeft, moveRight, rotate, setcurrentShape } from "../curre
 import { addShapeToBoardAndReturnboard, deactivateAllBoardCells } from "../../utils/helpers/generalHelpers";
 import { RotateShapAndRetrunboard, moveShapDownAndRetrunboard, moveShapToLeftAndRetrunboard, moveShapToRightAndRetrunboard } from "../../utils/helpers/movementHelpers";
 
-const initialTops = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const boardSlice = createSlice({
-  initialState: { boardStats: initiaBoardlState, tops: initialTops },
+  initialState: {
+     boardStats: initiaBoardlState,
+     speedLevel:1000, // 1 sec
+     score:0,
+     isGameRuning:false
+    },
   name: "board",
   reducers: {
     clearBoard: (state) => {

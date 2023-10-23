@@ -69,14 +69,14 @@ const Board = () => {
   }
   return (
     <>
-      <button
+      {/* <button
         onClick={() => {
           dispatch(setcurrentShape(nextShape));
           setnextShape(createShapObject(randomShapeGenerator()))
         }}
       >
         start game
-      </button>
+      </button> */}
       <button onClick={movingLeftHanddler}>left</button>
       <button onClick={movingRightHanddler}>right</button>
       <button onClick={movingDownHanddler}>down</button>
