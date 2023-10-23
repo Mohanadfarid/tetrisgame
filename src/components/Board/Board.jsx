@@ -12,6 +12,7 @@ import {
   setcurrentShape,
 } from "../../features/currentShape/currentShapeSlice";
 import {
+  checkIfShapCanBeInserted,
   checkIfShapeCanGoDown,
   checkIfShapeCanGoLeft,
   checkIfShapeCanGoRight,
@@ -31,13 +32,20 @@ const Board = () => {
 
 
   useEffect(() => {
-    if (!paused) {
+    console.log(!paused,boardInfo.isGameRuning)
+    if (!paused&&boardInfo.isGameRuning) {
       const interval = setInterval(() => {
-        if(checkIfShapeCanGoDown(shapInfo, boardInfo)){
+        if(checkIfShapeCanGoDown(shapInfo, boardInfo)){ 
           dispatch(moveDown(shapInfo));
         }else{
-          dispatch(setcurrentShape(nextShape));
-          setnextShape(createShapObject(randomShapeGenerator()))
+          if(checkIfShapCanBeInserted(nextShape,boardInfo)){
+            dispatch(setcurrentShape(nextShape));
+            setnextShape(createShapObject(randomShapeGenerator()))
+          }else{
+            dispatch(clearBoard())
+            alert(`the game has ended! try again?`)
+          }
+          
         }
       }, 1000);
       return () => clearInterval(interval);

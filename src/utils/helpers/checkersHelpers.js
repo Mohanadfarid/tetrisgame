@@ -94,3 +94,19 @@ export const checkIfShapeCanGoLeft = (currentShape, board) => {
     }
     return true
   }
+
+  export const checkIfShapCanBeInserted =(currentShape, board)=>{
+    const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
+    const rowpossession = currentShape.rowpossession
+    const coulmnPossession = currentShape.coulmnPossession
+    const boardStats = board.boardStats
+
+    for(let coulmn=shape.length-1;coulmn>=0;coulmn--){
+      for(let row=0;row<shape[coulmn].length;row++){
+        if(shape[coulmn][row].isactive===true){ // only checking the shape's active cells
+          if(boardStats[coulmnPossession+coulmn][19-rowpossession-row].color!=='black')return false //checking if the shap n
+        }
+      }
+    }
+    return true
+  }
