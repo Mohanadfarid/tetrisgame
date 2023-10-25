@@ -10,6 +10,8 @@ import {
 import {
   addShapeToBoardAndReturnboard,
   deactivateAllBoardCells,
+  getFullRowsIndices,
+  removeFullRowsAndShiftBoard,
 } from "../../utils/helpers/generalHelpers";
 import {
   RotateShapAndRetrunboard,
@@ -33,7 +35,7 @@ const boardSlice = createSlice({
       state.boardStats = initiaBoardlState;
       state.speedLevel = 1000; // 1 sec
       state.score = 0;
-      state.isGameRuning = false;
+      state.isGameRuning = true;
     },
     addShapeAtTop: (state, action) => {
       state.boardStats = addShapeToBoardAndReturnboard(
@@ -44,13 +46,26 @@ const boardSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(setcurrentShape, (state, action) => {
+
       //deactivating all the board cells so that the new shap will have the only active cells in the board
       const deactivatedBoard = deactivateAllBoardCells(state.boardStats);
-      state.boardStats = addShapeToBoardAndReturnboard(
-        action.payload,
-        deactivatedBoard
-      );
+      state.boardStats = addShapeToBoardAndReturnboard(action.payload,deactivatedBoard);
       state.isGameRuning = true;
+
+
+      // to do here
+      
+      //removing full rows and adjusting the board
+      const fullRowsIndices = getFullRowsIndices(state.boardStats)
+      state.boardStats=removeFullRowsAndShiftBoard(state.boardStats,fullRowsIndices)
+
+      //calculating the new score
+      state.score+=(fullRowsIndices.length*10)
+
+
+
+      //to do here
+      //check if the score passed a spcific number then increase the speed based on it
     });
 
     builder.addCase(moveLeft, (state, action) => {

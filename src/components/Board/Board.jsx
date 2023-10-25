@@ -32,7 +32,6 @@ const Board = () => {
 
 
   useEffect(() => {
-    console.log(!paused,boardInfo.isGameRuning)
     if (!paused&&boardInfo.isGameRuning) {
       const interval = setInterval(() => {
         if(checkIfShapeCanGoDown(shapInfo, boardInfo)){ 
@@ -42,6 +41,7 @@ const Board = () => {
             dispatch(setcurrentShape(nextShape));
             setnextShape(createShapObject(randomShapeGenerator()))
           }else{
+            setpaused(true)
             dispatch(clearBoard())
             alert(`the game has ended! try again?`)
           }
@@ -77,21 +77,12 @@ const Board = () => {
   }
   return (
     <>
-      {/* <button
-        onClick={() => {
-          dispatch(setcurrentShape(nextShape));
-          setnextShape(createShapObject(randomShapeGenerator()))
-        }}
-      >
-        start game
-      </button> */}
       <button onClick={movingLeftHanddler}>left</button>
       <button onClick={movingRightHanddler}>right</button>
       <button onClick={movingDownHanddler}>down</button>
       <button onClick={rotatingHanddler}>rotate</button>
       <button onClick={()=>setpaused(!paused)}>{paused?`resume`:`pause`}</button>
-      <button onClick={()=>{dispatch(clearBoard())}}>reset board</button>
-      
+      <div>score:{boardInfo.score}</div>
       
       <div className={`${styles.boardBody}`}>
         {boardInfo.boardStats.map((columnInfo, columnidex) => (
