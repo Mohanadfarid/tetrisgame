@@ -18,8 +18,8 @@ import {
   checkIfShapeCanGoRight,
   checkIfShapeCanRotate,
 } from "../../utils/helpers/checkersHelpers";
-import { clearBoard } from "../../features/board/boardSlice";
-import { createShapObject } from "../../utils/helpers/generalHelpers";
+import { clearBoard, clearFullRows } from "../../features/board/boardSlice";
+import { createShapObject, } from "../../utils/helpers/generalHelpers";
 import NextShape from "../NextShap/NextShape";
 
 
@@ -32,15 +32,16 @@ const Board = () => {
 
 
   useEffect(() => {
-    console.log(boardInfo.speedLevel)
     if (!paused&&boardInfo.isGameRuning) {
       const interval = setInterval(() => {
         if(checkIfShapeCanGoDown(shapInfo, boardInfo)){ 
           dispatch(moveDown(shapInfo));
         }else{
           if(checkIfShapCanBeInserted(nextShape,boardInfo)){
-            dispatch(setcurrentShape(nextShape));
-            setnextShape(createShapObject(randomShapeGenerator()))
+            dispatch(clearFullRows())
+              dispatch(setcurrentShape(nextShape));
+              setnextShape(createShapObject(randomShapeGenerator()))
+            
           }else{
             setpaused(true)
             dispatch(clearBoard())

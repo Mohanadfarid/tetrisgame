@@ -94,7 +94,6 @@ const removeRowAndReturnBoard =(board,rowIndex)=>{
 
 const shiftBoardRows=(board,index)=>{ //function to shift all the rows to cover the empty rows
 let updatedBoard =[...board]
-console.log(index)
 for(let column=0;column<10;column++){
   for(let row=index;row>0;row--){
     updatedBoard[column][row]=updatedBoard[column][row-1]

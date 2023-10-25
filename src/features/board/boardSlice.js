@@ -44,13 +44,31 @@ const boardSlice = createSlice({
         state.boardStats
       );
     },
+    clearFullRows: (state) => {
+      //to do fix the logic below this line coz it only works if its copied to the movedown case
+      //removing full rows and adjusting the board
+      const fullRowsIndices = getFullRowsIndices(state.boardStats);
+      state.boardStats = removeFullRowsAndShiftBoard(
+        state.boardStats,
+        fullRowsIndices
+      );
+
+      //calculating the new score
+      state.score += fullRowsIndices.length * 10;
+
+      //calculating speed level
+      state.speedLevel = calcSpeedOnScore(state.score);
+    },
   },
+
   extraReducers: (builder) => {
     builder.addCase(setcurrentShape, (state, action) => {
-
       //deactivating all the board cells so that the new shap will have the only active cells in the board
       const deactivatedBoard = deactivateAllBoardCells(state.boardStats);
-      state.boardStats = addShapeToBoardAndReturnboard(action.payload,deactivatedBoard);
+      state.boardStats = addShapeToBoardAndReturnboard(
+        action.payload,
+        deactivatedBoard
+      );
       state.isGameRuning = true;
     });
 
@@ -69,17 +87,10 @@ const boardSlice = createSlice({
     });
 
     builder.addCase(moveDown, (state, action) => {
-      state.boardStats = moveShapDownAndRetrunboard(action.payload,state.boardStats);
-
-      //removing full rows and adjusting the board
-      const fullRowsIndices = getFullRowsIndices(state.boardStats)
-      state.boardStats=removeFullRowsAndShiftBoard(state.boardStats,fullRowsIndices)
-      
-      //calculating the new score
-      state.score+=(fullRowsIndices.length*10)
-
-      //calculating speed level
-      state.speedLevel=calcSpeedOnScore(state.score)
+      state.boardStats = moveShapDownAndRetrunboard(
+        action.payload,
+        state.boardStats
+      );
     });
 
     builder.addCase(rotate, (state, action) => {
@@ -90,5 +101,5 @@ const boardSlice = createSlice({
     });
   },
 });
-export const { addShapeAtTop, clearBoard } = boardSlice.actions;
+export const { addShapeAtTop, clearBoard, clearFullRows } = boardSlice.actions;
 export default boardSlice.reducer;
