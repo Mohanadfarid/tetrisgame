@@ -113,3 +113,35 @@ export const removeFullRowsAndShiftBoard=(board,FullRowsIndices)=>{ // afunction
 
   return updatedboard
 }
+
+export const calcSpeedOnScore = (score)=>{
+  if (score<=30) {
+    return 1000
+  }else if(score<=60){
+    return 900
+  }
+  else if(score<=90){
+    return 800
+  }
+  else if(score<=120){
+    return 700
+  }
+  else if(score<=150){
+    return 600
+  }
+  else if(score<=180){
+    return 500
+  }
+  else if(score<=210){
+    return 400
+  }
+  else if(score<=240){
+    return 300
+  }
+  else if(score<=270){
+    return 200
+  }
+  else {
+    return 100
+  }
+}

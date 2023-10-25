@@ -32,6 +32,7 @@ const Board = () => {
 
 
   useEffect(() => {
+    console.log(boardInfo.speedLevel)
     if (!paused&&boardInfo.isGameRuning) {
       const interval = setInterval(() => {
         if(checkIfShapeCanGoDown(shapInfo, boardInfo)){ 
@@ -47,7 +48,7 @@ const Board = () => {
           }
           
         }
-      }, 1000);
+      }, boardInfo.speedLevel);
       return () => clearInterval(interval);
     }
   }, [paused,shapInfo,boardInfo,dispatch,nextShape]);
@@ -82,7 +83,8 @@ const Board = () => {
       <button onClick={movingDownHanddler}>down</button>
       <button onClick={rotatingHanddler}>rotate</button>
       <button onClick={()=>setpaused(!paused)}>{paused?`resume`:`pause`}</button>
-      <div>score:{boardInfo.score}</div>
+      <div>score:  {boardInfo.score}</div>
+      <div>speed:  {boardInfo.speedLevel/1000}s</div>
       
       <div className={`${styles.boardBody}`}>
         {boardInfo.boardStats.map((columnInfo, columnidex) => (

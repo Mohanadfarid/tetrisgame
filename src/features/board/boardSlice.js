@@ -9,6 +9,7 @@ import {
 } from "../currentShape/currentShapeSlice";
 import {
   addShapeToBoardAndReturnboard,
+  calcSpeedOnScore,
   deactivateAllBoardCells,
   getFullRowsIndices,
   removeFullRowsAndShiftBoard,
@@ -51,21 +52,6 @@ const boardSlice = createSlice({
       const deactivatedBoard = deactivateAllBoardCells(state.boardStats);
       state.boardStats = addShapeToBoardAndReturnboard(action.payload,deactivatedBoard);
       state.isGameRuning = true;
-
-
-      // to do here
-      
-      //removing full rows and adjusting the board
-      const fullRowsIndices = getFullRowsIndices(state.boardStats)
-      state.boardStats=removeFullRowsAndShiftBoard(state.boardStats,fullRowsIndices)
-
-      //calculating the new score
-      state.score+=(fullRowsIndices.length*10)
-
-
-
-      //to do here
-      //check if the score passed a spcific number then increase the speed based on it
     });
 
     builder.addCase(moveLeft, (state, action) => {
@@ -83,10 +69,17 @@ const boardSlice = createSlice({
     });
 
     builder.addCase(moveDown, (state, action) => {
-      state.boardStats = moveShapDownAndRetrunboard(
-        action.payload,
-        state.boardStats
-      );
+      state.boardStats = moveShapDownAndRetrunboard(action.payload,state.boardStats);
+
+      //removing full rows and adjusting the board
+      const fullRowsIndices = getFullRowsIndices(state.boardStats)
+      state.boardStats=removeFullRowsAndShiftBoard(state.boardStats,fullRowsIndices)
+      
+      //calculating the new score
+      state.score+=(fullRowsIndices.length*10)
+
+      //calculating speed level
+      state.speedLevel=calcSpeedOnScore(state.score)
     });
 
     builder.addCase(rotate, (state, action) => {
