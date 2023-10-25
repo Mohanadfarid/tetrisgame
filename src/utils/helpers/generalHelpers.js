@@ -92,8 +92,15 @@ const removeRowAndReturnBoard =(board,rowIndex)=>{
   return updatedBoard
 }
 
-const shiftBoardRows=(board)=>{ //function to shift all the rows to cover the empty rows
+const shiftBoardRows=(board,index)=>{ //function to shift all the rows to cover the empty rows
 let updatedBoard =[...board]
+console.log(index)
+for(let column=0;column<10;column++){
+  for(let row=index;row>0;row--){
+    updatedBoard[column][row]=updatedBoard[column][row-1]
+  }
+}
+return updatedBoard
 }
 
 export const removeFullRowsAndShiftBoard=(board,FullRowsIndices)=>{ // afunction to remove full rows and shift the board 
@@ -101,6 +108,7 @@ export const removeFullRowsAndShiftBoard=(board,FullRowsIndices)=>{ // afunction
   
   FullRowsIndices.forEach((index)=>{
     updatedboard=removeRowAndReturnBoard(updatedboard,index)
+    updatedboard=shiftBoardRows(updatedboard,index)
   })
 
   return updatedboard
