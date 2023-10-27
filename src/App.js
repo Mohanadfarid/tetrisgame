@@ -1,11 +1,11 @@
 
 import './App.css';
-import Board from './components/Board/Board';
+import GameUi from './components/GameUi/GameUi';
 
 function App() {
   return (<>
     <h1>TETRIS GAME!</h1>
-    <Board/>
+    <GameUi/>
   </>);
 }
 
