@@ -37,7 +37,7 @@ const Board = ({ nextShape, setnextShape,paused,setpaused }) => {
       }, boardInfo.speedLevel);
       return () => clearInterval(interval);
     }
-  }, [paused, shapInfo, boardInfo, dispatch, nextShape, setnextShape]);
+  }, [paused, shapInfo, boardInfo, dispatch, nextShape, setnextShape,setpaused]);
 
 
   return (
