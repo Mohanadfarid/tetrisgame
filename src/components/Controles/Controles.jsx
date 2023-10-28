@@ -1,4 +1,4 @@
-
+import styles from './controles.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import {
   checkIfShapeCanGoDown,
@@ -13,7 +13,7 @@ import {
   rotate,
 } from "../../features/currentShape/currentShapeSlice";
 
-const Controles = ({paused,setpaused}) => {
+const Controles = () => {
   const dispatch = useDispatch();
   const boardInfo = useSelector((state) => state.board);
   const shapInfo = useSelector((state) => state.currentShape);
@@ -44,15 +44,12 @@ const Controles = ({paused,setpaused}) => {
     }
   };
   return (
-    <>
-      <button onClick={movingLeftHanddler}>left</button>
-      <button onClick={movingRightHanddler}>right</button>
-      <button onClick={movingDownHanddler}>down</button>
-      <button onClick={rotatingHanddler}>rotate</button>
-      <button onClick={() => setpaused(!paused)}>
-        {paused ? `resume` : `pause`}
-      </button>
-    </>
+    <div className={styles.ControlesContainer}>
+      <button className={styles.movementBtn} onClick={movingLeftHanddler}>left</button>
+      <button className={styles.movementBtn} onClick={movingDownHanddler}>down</button>
+      <button className={styles.movementBtn} onClick={movingRightHanddler}>right</button>
+      <button className={styles.movementBtn} onClick={rotatingHanddler}>rotate</button>
+    </div>
   );
 };
 

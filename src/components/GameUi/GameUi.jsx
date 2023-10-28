@@ -19,10 +19,11 @@ const GameUi = () => {
             <div className={styles.board}><Board paused={paused} setpaused={setpaused} nextShape={nextShape} setnextShape={setnextShape}/></div>
             <div className={styles.nextshape}><NextShape  nextShape={nextShape}/></div>
             <div className={styles.gameInfo}>
-            <div >score:  {boardInfo.score}</div> 
-            <div >speed:  {boardInfo.speedLevel/1000}s</div>
+            <div ><span className={styles.name}>score</span>  <div className={styles.value}>{boardInfo.score}</div></div> 
+            <div ><span className={styles.name}>speed</span>  <div className={styles.value}>{boardInfo.speedLevel/1000}s</div></div>
             </div>
-            <div className={styles.controles}><Controles paused={paused} setpaused={setpaused} /></div>
+            <button className={styles.pause} onClick={() => setpaused(!paused)}>{paused ? `resume` : `pause`}</button>
+            <div className={styles.controles}><Controles/></div>
             </div>
     );
 }

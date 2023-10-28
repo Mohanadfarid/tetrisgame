@@ -1,0 +1,15 @@
+.ControlesContainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+button{
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0.2rem 0.5rem;
+
+}
+.movementBtn{
+    background-color: white;
+}
