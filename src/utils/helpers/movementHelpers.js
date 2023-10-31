@@ -3,9 +3,8 @@ import { removeShapfromBoard } from "./generalHelpers";
 //a funciton to move the shape to left on the board
 export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
     let newBoard=[...board];
-    const shape=currentShape.shape.shape[currentShape.shapeFormIndex];
-    const coulmnPossession = currentShape.coulmnPossession;
-    const rowpossession = currentShape.rowpossession
+    const {shapeFormIndex,rowpossession,coulmnPossession}=currentShape
+    const shape=currentShape.shape.shape[shapeFormIndex];
    
     //removing the current shape
     newBoard = [...removeShapfromBoard(currentShape,board)]
@@ -24,10 +23,9 @@ export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
   
   export const moveShapToRightAndRetrunboard=(currentShape,board)=>{
     let newBoard=[...board];
-    const shape = currentShape.shape.shape[currentShape.shapeFormIndex];
-    const coulmnPossession = currentShape.coulmnPossession;
-    const rowpossession = currentShape.rowpossession
-  
+    const {shapeFormIndex,rowpossession,coulmnPossession}=currentShape
+    const shape = currentShape.shape.shape[shapeFormIndex];
+
     //removing the current shape
     newBoard = [...removeShapfromBoard(currentShape,board)]
   
@@ -46,9 +44,9 @@ export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
   
   export const moveShapDownAndRetrunboard=(currentShape,board)=>{
     let newBoard=[...board];
-    const shape = currentShape.shape.shape[currentShape.shapeFormIndex];
-    const coulmnPossession = currentShape.coulmnPossession;
-    const rowpossession = currentShape.rowpossession
+    const {shapeFormIndex,rowpossession,coulmnPossession}=currentShape
+    const shape = currentShape.shape.shape[shapeFormIndex];
+
   
   
     //removing the current shape
@@ -67,12 +65,11 @@ export const moveShapToLeftAndRetrunboard=(currentShape,board)=>{
   }
   
   export const RotateShapAndRetrunboard=(currentShape,board)=>{
+    let {shapeFormIndex,rowpossession,coulmnPossession}=currentShape
     let tempBoard =JSON.parse(JSON.stringify(board))
     const shapeObject=currentShape.shape.shape
-    let shape = currentShape.shape.shape[currentShape.shapeFormIndex]
-    const rowpossession = currentShape.rowpossession
-    const coulmnPossession = currentShape.coulmnPossession
-    let shapeFormIndex = currentShape.shapeFormIndex;
+    let shape = currentShape.shape.shape[shapeFormIndex]
+
   
       //removing the current shape from the tempBoard
       tempBoard = [...removeShapfromBoard(currentShape,board)]

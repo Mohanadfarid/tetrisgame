@@ -1,8 +1,7 @@
 //a function that addes a shap to the top of a board and return the board
 export const addShapeToBoardAndReturnboard = (currentShape, board) => {
-  const shape = currentShape.shape.shape[currentShape.shapeFormIndex];
-  const rowpossession = currentShape.rowpossession;
-  const coulmnPossession = currentShape.coulmnPossession;
+  const {shapeFormIndex,rowpossession,coulmnPossession}=currentShape
+  const shape = currentShape.shape.shape[shapeFormIndex];
   const NewBoard = [...board];
 
   for (let column = 0; column < shape.length; column++) {
@@ -15,10 +14,10 @@ export const addShapeToBoardAndReturnboard = (currentShape, board) => {
 };
 
 export const removeShapfromBoard = (currentShape, board) => {
+  const {shapeFormIndex,rowpossession,coulmnPossession}=currentShape
   const newBoard = [...board];
-  const shape = currentShape.shape.shape[currentShape.shapeFormIndex];
-  const coulmnPossession = currentShape.coulmnPossession;
-  const rowpossession = currentShape.rowpossession;
+  const shape = currentShape.shape.shape[shapeFormIndex];
+
 
   for (let coulmn = shape.length - 1; coulmn >= 0; coulmn--) {
     for (let row = 0; row < shape[coulmn].length; row++) {

@@ -36,10 +36,8 @@ export const checkIfShapeCanGoLeft = (currentShape, board) => {
   export const checkIfShapeCanGoDown = (currentShape, board) => {
   
     if (!currentShape.shape.color) return false //checking if the there is a shape
-  
-    const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
-    const rowpossession = currentShape.rowpossession
-    const coulmnPossession = currentShape.coulmnPossession
+    const {shapeFormIndex,rowpossession,coulmnPossession}=currentShape
+    const shape = currentShape.shape.shape[shapeFormIndex]
     let tempBoard =JSON.parse(JSON.stringify(board.boardStats))
   
     if(rowpossession===0)return false
@@ -62,13 +60,13 @@ export const checkIfShapeCanGoLeft = (currentShape, board) => {
   export const checkIfShapeCanRotate = (currentShape, board) =>{
   
     if (!currentShape.shape.color) return false //checking if the there is a shape
-  
+    let {shapeFormIndex,rowpossession,coulmnPossession}=currentShape
     let tempBoard =JSON.parse(JSON.stringify(board.boardStats))
     const shapeObject=currentShape.shape.shape
-    let shape = currentShape.shape.shape[currentShape.shapeFormIndex]
-    const rowpossession = currentShape.rowpossession
-    const coulmnPossession = currentShape.coulmnPossession
-    let shapeFormIndex = currentShape.shapeFormIndex;
+    let shape = currentShape.shape.shape[shapeFormIndex]
+
+
+
   
   
     //removing the current shape from the tempBoard
@@ -94,9 +92,8 @@ export const checkIfShapeCanGoLeft = (currentShape, board) => {
   }
 
   export const checkIfShapCanBeInserted =(currentShape, board)=>{
-    const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
-    const rowpossession = currentShape.rowpossession
-    const coulmnPossession = currentShape.coulmnPossession
+    const {shapeFormIndex,rowpossession,coulmnPossession}=currentShape
+    const shape = currentShape.shape.shape[shapeFormIndex]
     const boardStats = board.boardStats
 
     for(let coulmn=shape.length-1;coulmn>=0;coulmn--){
