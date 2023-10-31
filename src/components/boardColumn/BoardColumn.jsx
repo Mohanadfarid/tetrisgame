@@ -8,6 +8,7 @@ const BoardColumn = ({ columnInfo }) => {
         <Cell
           key={rowidx}
           cellInfo={cellInfo}
+          numberOfCells={20}
         />
       ))}
     </div>

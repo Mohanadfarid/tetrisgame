@@ -32,6 +32,7 @@ const Board = ({ nextShape, setnextShape,paused,setpaused }) => {
             setpaused(true);
             dispatch(clearBoard());
             alert(`the game has ended! try again?`);
+            setnextShape(createShapObject(randomShapeGenerator()))
           }
         }
       }, boardInfo.speedLevel);

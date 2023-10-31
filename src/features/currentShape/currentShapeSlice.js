@@ -18,16 +18,16 @@ const currentShapeSlice = createSlice({
       state.rowpossession = action.payload.rowpossession;
       state.shapeFormIndex = action.payload.shapeFormIndex
     },
-    moveLeft: (state, action) => {
+    moveLeft: (state) => {
       state.coulmnPossession--
     },
-    moveRight: (state, action) => {
+    moveRight: (state) => {
       state.coulmnPossession++
     },
-    moveDown: (state, action) => {
+    moveDown: (state,) => {
       state.rowpossession--
     },
-    rotate: (state,action) => {
+    rotate: (state) => {
       const shape = state.shape.shape
       if(state.shapeFormIndex!==shape.length-1){
         state.shapeFormIndex++;

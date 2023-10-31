@@ -1,11 +1,11 @@
+
 .ui {
-  border: 2px solid black;
   width: 100vw;
   height: 100vh;
   max-width: 600px;
   display: grid;
   grid-template-columns: 70% 1fr;
-  grid-template-rows: auto repeat(3, 1fr) auto;
+  grid-template-rows: auto auto repeat(2, 1fr) auto;
   gap: 20px;
   margin: auto;
 }
@@ -32,7 +32,7 @@
   cursor: pointer;
   grid-column: 2/3;
   grid-row: 4/5;
-  height: 80%;
+  height: 50%;
   align-self: flex-end;
 }
 
@@ -58,4 +58,23 @@
     text-align: center;
     padding: 0.3rem;
     margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 400px){
+  html{
+    font-size: 10px;
+  }
+}
+@media only screen and (max-height: 500px){
+  html{
+    font-size: 10px;
+  }
+  .pause{
+    font-size: 100%;
+    cursor: pointer;
+    height: 100%;
+    align-self: flex-end;
+  }
+  
+
 }

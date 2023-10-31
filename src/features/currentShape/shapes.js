@@ -337,4 +337,3 @@ export const randomShapeGenerator = () => {
     shapeFormIndex: randomformIndex,
   };
 };
-// to do later create func to generate random shape with random positon and random rotate

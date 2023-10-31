@@ -4,9 +4,8 @@ import { removeShapfromBoard } from "./generalHelpers";
 export const checkIfShapeCanGoLeft = (currentShape, board) => {
 
     if (!currentShape.shape.color) return false //checking if the there is a shape
-    const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
-    const rowpossession = currentShape.rowpossession
-    const coulmnPossession = currentShape.coulmnPossession
+    const {shapeFormIndex,rowpossession,coulmnPossession}=currentShape
+    const shape = currentShape.shape.shape[shapeFormIndex]
     const boardStats = board.boardStats
   
     if (coulmnPossession===0)return false //checking if  shape is not at the left edge
@@ -21,9 +20,8 @@ export const checkIfShapeCanGoLeft = (currentShape, board) => {
   export const checkIfShapeCanGoRight = (currentShape, board) => {
   
     if (!currentShape.shape.color) return false //checking if the there is a shape
-    const shape = currentShape.shape.shape[currentShape.shapeFormIndex]
-    const rowpossession = currentShape.rowpossession
-    const coulmnPossession = currentShape.coulmnPossession
+    const {shapeFormIndex,rowpossession,coulmnPossession}=currentShape
+    const shape = currentShape.shape.shape[shapeFormIndex]
     const boardStats = board.boardStats
   
     if (coulmnPossession+shape.length-1===9)return false //checking if the shap is not at the right edge
