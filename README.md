@@ -6,7 +6,7 @@ A simple Tetris game built from scratch using React and Redux Toolkit.
 _Description: desktop view ._
 
 ![mobile view](./public/screenShots/mobile%20view.png)
-_Description: the landing page of the website._
+_Description: mobile view._
 
 ## Features
 
@@ -31,7 +31,7 @@ _Description: the landing page of the website._
 
    ```
 
-2. Clone the repository:
+2. install dependencies
 
    ```bash
    cd tetrisgame
@@ -40,11 +40,9 @@ _Description: the landing page of the website._
 
 ## Usage
 
-1. Clone the repository:
-
+1. start server:
    ```bash
    npm start
-
    ```
 
 2. Open your browser and visit http://localhost:3000 to play the game.
