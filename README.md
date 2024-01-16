@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# React Tetris
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple Tetris game built from scratch using React and Redux Toolkit.
 
-## Available Scripts
+![desktop view](./public/screenShots/desktop%20view.png)
+_Description: desktop view ._
 
-In the project directory, you can run:
+![mobile view](./public/screenShots/mobile%20view.png)
+_Description: the landing page of the website._
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Responsive Design:** Play Tetris on any device with a responsive layout.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Dynamic Speed:** The speed of falling shapes starts at 1 per move and decreases 0.1 seconds every 3 rows cleared.
 
-### `npm test`
+- **Manual Controls:** Interact with the game using buttons provided in the UI.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Pause and Resume:** Pause the game at any time and resume when ready to play.
 
-### `npm run build`
+- **Next Shape Preview:** See the upcoming shape in a preview window to plan your moves.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Score and Speed Display:** Track your progress with a score counter and dynamic speed display.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
 
-### `npm run eject`
+   ```bash
+   git clone https://github.com/Mohanadfarid/tetrisgame.git
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Clone the repository:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   ```bash
+   cd tetrisgame
+   npm install
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Usage
 
-## Learn More
+1. Clone the repository:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```bash
+   npm start
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```
 
-### Code Splitting
+2. Open your browser and visit http://localhost:3000 to play the game.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## UI Controls
 
-### Analyzing the Bundle Size
+- Left: Move shape left.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Right: Move shape right.
 
-### Making a Progressive Web App
+- Down: Move shape down.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Rotate: Rotate the shape to the right (if there isn't enough space it will do nothing).
 
-### Advanced Configuration
+- Pause/Resume: Click the pause button to pause the game, and click again to resume.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Project Structure
 
-### Deployment
+- `src/` - Contains the source code for the React Redux Tetris game.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- `public/` -Static assets and HTML template.
 
-### `npm run build` fails to minify
+## Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- React
+- Redux Toolkit
+
+## License
+
+This project is licensed under the MIT License
