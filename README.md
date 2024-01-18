@@ -22,6 +22,10 @@ _Description: mobile view._
 
 - **Score and Speed Display:** Track your progress with a score counter and dynamic speed display.
 
+## Live Demo
+
+Explore the live demo: [ Tetris Game Demo](https://mohanad-tetrisgame.netlify.app/)
+
 ## Installation
 
 1. Clone the repository:
